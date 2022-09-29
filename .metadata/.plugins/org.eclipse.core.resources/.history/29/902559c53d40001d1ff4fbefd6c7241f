@@ -15,23 +15,10 @@ public class Main extends JFrame{
 		JMenuBar menuBar = new JMenuBar();
 		JMenu gameMenu, helpMenu;
 		
-		gameMenu = new JMenu("Game");		
-		JMenuItem gameMenuItem1 = new JMenuItem("Game Option 1");
-		JMenuItem gameMenuItem2 = new JMenuItem("Game Option 2");
-		gameMenu.add(gameMenuItem1);
+		gameMenu = new JMenu("Game");
 		gameMenu.addSeparator();
-		gameMenu.add(gameMenuItem2);
-
 		helpMenu = new JMenu("Help");
-		JMenuItem helpMenuItem1 = new JMenuItem("Help Option 1");
 		helpMenu.addSeparator();
-		JMenuItem helpMenuItem2 = new JMenuItem("Help Option 2");
-
-
-		helpMenu.add(helpMenuItem1);
-		helpMenu.add(helpMenuItem2);
-		
-		
 
 		menuBar.add(gameMenu);
 		menuBar.add(helpMenu);
@@ -95,7 +82,7 @@ public class Main extends JFrame{
 		game.setVisible(true);
 		gameFrame.setVisible(true);
 		sideFrame.setVisible(true);
-		main.setJMenuBar(menuBar);
+		//main.setJMenuBar(frameMenu);
 		main.setVisible(true);
 		//sideFrame.add(numPuzSizes.numPuzComboBox);
 	}
