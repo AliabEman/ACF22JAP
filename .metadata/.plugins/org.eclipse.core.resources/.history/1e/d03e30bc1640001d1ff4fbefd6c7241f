@@ -9,7 +9,6 @@ public class Main extends JFrame{
 		JFrame main = new JFrame();
 		JPanel gameFrame = new JPanel();
 		JPanel sideFrame = new JPanel();
-		
 		//JButton gameBoard[][] = null;
 		//int dimChoice;
 		
