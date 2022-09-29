@@ -50,7 +50,6 @@ public class GameController extends JPanel {
 		mainFrame.setVisible(true);
 	}
 	
-	
 	void gameButtons() {
 		controlPanel.setLayout(new FlowLayout());
 		controlPanel.add(numPuzButton);

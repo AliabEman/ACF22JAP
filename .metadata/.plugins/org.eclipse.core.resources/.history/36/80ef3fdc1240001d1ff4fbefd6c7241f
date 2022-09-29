@@ -23,7 +23,6 @@ public class Main extends JFrame{
 
 		main.setSize(600,600);
 
-		
 		gameFrame.setSize(400,200);
 		sideFrame.setSize(200,300);
 		
