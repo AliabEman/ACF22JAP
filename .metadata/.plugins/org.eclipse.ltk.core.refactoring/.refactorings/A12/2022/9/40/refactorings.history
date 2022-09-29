@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;numpuz-a12-images&apos; to &apos;A12_NumPuz/src&apos;&#x0D;&#x0A;- Original project: &apos;A12&apos;&#x0D;&#x0A;- Destination element: &apos;A12_NumPuz/src&apos;&#x0D;&#x0A;- Original element: &apos;numpuz-a12-images&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move folder" destination="=A12_NumPuz/src" element1="numpuz-a12-images" files="0" flags="589830" folders="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1664461550249" units="0" version="1.0"/>
+</session>

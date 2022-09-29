@@ -1,0 +1,64 @@
+//import javax.swing.JFrame;
+//import javax.swing.JButton;
+//import javax.swing.JComponent;
+//import javax.swing.JRadioButton;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+public class GameController extends JFrame {
+	private JFrame mainFrame;
+	private JLabel radioHeader;
+	private JLabel statusLabel;
+	private JPanel controlPanel;
+
+	public GameController() {
+		gameRadioButton();
+	}
+
+	/**
+	 * dimension = size of the game board
+	 * gameType = the type of game to play
+	 */
+	int dimension[]= {3,4,5,6,7,8,9};
+	String gameType[] = {"Number", "Text"};
+
+	JButton gameChoice = new JButton("Selection");
+	JButton show = new JButton("Show");
+	JButton hide = new JButton("Hide");
+	JButton save = new JButton("Save");
+	JButton load = new JButton("Load");
+	JButton random = new JButton("Rand");
+	JButton finish = new JButton("Finish");
+
+	private void gameRadioButton() {
+		radioHeader.setText("Mode:");
+		final JRadioButton designRadioButton = new JRadioButton("Design", true);
+		final JRadioButton playRadioButton = new JRadioButton("Play");
+
+		designRadioButton.setMnemonic(KeyEvent.VK_C);
+		playRadioButton.setMnemonic(KeyEvent.VK_M);
+
+		designRadioButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {         
+				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
+			}           
+		});
+		playRadioButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {             
+				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
+			}           
+		});
+
+
+		ButtonGroup radioGroup = new ButtonGroup();
+		radioGroup.add(designRadioButton);
+		radioGroup.add(playRadioButton);
+		controlPanel.add(radioHeader);
+		controlPanel.add(designRadioButton);
+		controlPanel.add(playRadioButton);
+		mainFrame.setVisible(true);
+	}
+
+}
