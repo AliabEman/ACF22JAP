@@ -21,13 +21,12 @@ public class Main extends JFrame{
 		gameMenu.add(gameMenuItem1);
 		gameMenu.addSeparator();
 		gameMenu.add(gameMenuItem2);
-		gameMenu.addSeparator();
 
 		helpMenu = new JMenu("Help");
 		JMenuItem helpMenuItem1 = new JMenuItem("Help Option 1");
 		helpMenu.addSeparator();
 		JMenuItem helpMenuItem2 = new JMenuItem("Help Option 2");
-		helpMenu.addSeparator();
+
 
 		helpMenu.add(helpMenuItem1);
 		helpMenu.add(helpMenuItem2);
@@ -62,7 +61,6 @@ public class Main extends JFrame{
 		main.setLayout(new GridLayout(1,2));
 		main.add(gameFrame);
 		main.add(sideFrame);
-		main.add(game);
 		sideFrame.add(game);
 		
 		

@@ -63,7 +63,6 @@ public class Main extends JFrame{
 		main.add(gameFrame);
 		main.add(sideFrame);
 		main.add(game);
-		sideFrame.add(game);
 		
 		
 

@@ -10,7 +10,7 @@ import javafx.scene.layout.GridPane;
 
 
 public class GameController extends JPanel {
-	private JFrame mainFrame;
+	private JPanel mainFrame;
 	private JLabel radioHeader;
 	private JLabel statusLabel;
 	private JPanel controlPanel;
@@ -37,7 +37,7 @@ public class GameController extends JPanel {
 	JButton finish = new JButton("Finish");
 
 	private void prepareGame() {
-		mainFrame = new JFrame();
+		mainFrame = new JPanel();
 		mainFrame.setSize(400,400);
 		mainFrame.setLayout(new GridLayout(1,3));
 

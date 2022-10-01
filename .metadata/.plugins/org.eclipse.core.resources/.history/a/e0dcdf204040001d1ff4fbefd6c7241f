@@ -25,7 +25,7 @@ public class GameController extends JPanel {
 	int dimension[]= {3,4,5,6,7,8,9};
 	String gameType[] = {"Number", "Text"};
 	
-	ImageIcon icon = new ImageIcon("numpuz-a12-images/gamelogo.png");
+	ImageIcon icon = new ImageIcon("/src/numpuz-a12-images/gamelogo.png");
 	
 	JButton numPuzButton = new JButton("Button", icon);
 	JButton gameChoice = new JButton("Selection");

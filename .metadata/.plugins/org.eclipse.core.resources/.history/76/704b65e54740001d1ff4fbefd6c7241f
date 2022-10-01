@@ -21,18 +21,15 @@ public class Main extends JFrame{
 		gameMenu.add(gameMenuItem1);
 		gameMenu.addSeparator();
 		gameMenu.add(gameMenuItem2);
-		gameMenu.addSeparator();
 
 		helpMenu = new JMenu("Help");
 		JMenuItem helpMenuItem1 = new JMenuItem("Help Option 1");
 		helpMenu.addSeparator();
 		JMenuItem helpMenuItem2 = new JMenuItem("Help Option 2");
-		helpMenu.addSeparator();
+
 
 		helpMenu.add(helpMenuItem1);
 		helpMenu.add(helpMenuItem2);
-		
-		
 
 		menuBar.add(gameMenu);
 		menuBar.add(helpMenu);
@@ -42,19 +39,16 @@ public class Main extends JFrame{
 		//int dimChoice;
 		
 		GameController game = new GameController();
-		
-	
-		
+				
 		//dimChoice=2;
 		
-
 		//NumPuzSizeOptions numPuzSizes = new NumPuzSizeOptions();
 
 		main.setSize(600,600);
 
 		
 		gameFrame.setSize(400,200);
-		sideFrame.setSize(200,300);
+		sideFrame.setSize(200,400);
 		
 		gameFrame.setLayout(new GridLayout(3,3));
 		gameFrame.isPreferredSizeSet();
@@ -62,7 +56,7 @@ public class Main extends JFrame{
 		main.setLayout(new GridLayout(1,2));
 		main.add(gameFrame);
 		main.add(sideFrame);
-		main.add(game);
+		game.getComponents();
 		sideFrame.add(game);
 		
 		
