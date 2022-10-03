@@ -4,12 +4,12 @@
 :: ---------------------------------------------------------------------
 :: Begin of Script (Assignments - F22)
 :: ---------------------------------------------------------------------
-
+::students: Aliab Eman & Matthew Vecchio
+::Student number : 041000420 & 041004137
 
 CLS
 
 :: LOCAL VARIABLES ....................................................
-SET JAVAFXDIR=/SOFT/copy/dev/java/javafx/lib
 SET SRCDIR=src
 SET BINDIR=bin
 SET BINOUT=game-javac.out
@@ -23,7 +23,7 @@ SET DOCOUT=game-javadoc.out
 SET DOCERR=game-javadoc.err
 SET MAINCLASSSRC=src/game/GameBasic.java
 SET MAINCLASSBIN=game.GameBasic
-SET MODULELIST=javafx.controls,javafx.fxml
+::SET MODULELIST=javafx.controls,javafx.fxml
 
 @echo off
 
@@ -41,10 +41,11 @@ ECHO "                                   "
 ECHO "[ASSIGNMENT SCRIPT ---------------]"
 
 ECHO "1. Compiling ......................"
-javac -Xlint -cp ".;%SRCDIR%;%JAVAFXDIR%/*" %MAINCLASSSRC% -d %BINDIR% > %BINOUT% 2> %BINERR%
+javac -Xlint -cp ".;%SRCDIR%/*" %MAINCLASSSRC% -d %BINDIR% > %BINOUT% 2> %BINERR% 
+::
 
 :: ECHO "Running  ........................."
-:: start java -cp ".;%BINDIR%;%JAVAFXDIR%/*" %MAINCLASSBIN%
+:: start java -cp ".;%BINDIR%;/*" %MAINCLASSBIN%
 
 ECHO "2. Creating Jar ..................."
 cd bin
@@ -52,11 +53,11 @@ jar cvfe %JARNAME% %MAINCLASSBIN% . > %JAROUT% 2> %JARERR%
 
 ECHO "3. Creating Javadoc ..............."
 cd ..
-javadoc -cp ".;%BINDIR%;%JAVAFXDIR%/*" --module-path "%JAVAFXDIR%" --add-modules %MODULELIST% -d %DOCDIR% -sourcepath %SRCDIR% -subpackages %DOCPACK% > %DOCOUT% 2> %DOCERR%
+javadoc -cp ".;%BINDIR%/*" --add-modules %MODULELIST% -d %DOCDIR% -sourcepath %SRCDIR% -subpackages %DOCPACK% > %DOCOUT% 2> %DOCERR%
 
 cd bin
 ECHO "4. Running Jar ...................."
-start java --module-path "%JAVAFXDIR%" --add-modules %MODULELIST% -jar %JARNAME%
+start java --add-modules %MODULELIST% -jar %JARNAME%
 cd ..
 
 ECHO "[END OF SCRIPT -------------------]"
