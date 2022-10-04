@@ -1,20 +1,19 @@
-//import javax.swing.JFrame;
-//import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JButton;
 //import javax.swing.JComponent;
-//import javax.swing.JRadioButton;
+import javax.swing.JRadioButton;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-import javafx.scene.layout.GridPane;
-
 
 public class GameController extends JPanel {
 	private JFrame mainFrame;
 	private JLabel radioHeader;
 	private JLabel statusLabel;
 	private JPanel controlPanel;
-	private static final String image= "src/numpuz-a12-images/gamelogo.png";
+
+	private static final String image = "A12/numpuz-a12-images/gamelogo.png";
+	// src/numpuz-a12-images/gamelogo.png
 
 	public GameController() {
 		prepareGame();
@@ -22,11 +21,11 @@ public class GameController extends JPanel {
 		gameRadioButton();
 	}
 
-	int dimension[]= {3,4,5,6,7,8,9};
-	String gameType[] = {"Number", "Text"};
-	
+	int dimension[] = { 3, 4, 5, 6, 7, 8, 9 };
+	String gameType[] = { "Number", "Text" };
+
 	ImageIcon icon = new ImageIcon(image);
-	
+
 	JButton numPuzButton = new JButton("", icon);
 	JButton gameChoice = new JButton("Selection");
 	JButton show = new JButton("Show");
@@ -38,8 +37,8 @@ public class GameController extends JPanel {
 
 	private void prepareGame() {
 		mainFrame = new JFrame();
-		mainFrame.setSize(400,400);
-		mainFrame.setLayout(new GridLayout(1,3));
+		mainFrame.setSize(400, 400);
+		mainFrame.setLayout(new GridLayout(1, 3));
 
 		radioHeader = new JLabel();
 		statusLabel = new JLabel();
@@ -50,8 +49,7 @@ public class GameController extends JPanel {
 		mainFrame.add(controlPanel);
 		mainFrame.setVisible(true);
 	}
-	
-	
+
 	void gameButtons() {
 		controlPanel.setLayout(new FlowLayout());
 		controlPanel.add(numPuzButton);
@@ -74,16 +72,15 @@ public class GameController extends JPanel {
 		playRadioButton.setMnemonic(KeyEvent.VK_M);
 
 		designRadioButton.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {         
-				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
-			}           
+			public void itemStateChanged(ItemEvent e) {
+				statusLabel.setText((e.getStateChange() == 1 ? "checked" : "unchecked"));
+			}
 		});
 		playRadioButton.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {             
-				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
-			}           
+			public void itemStateChanged(ItemEvent e) {
+				statusLabel.setText((e.getStateChange() == 1 ? "checked" : "unchecked"));
+			}
 		});
-
 
 		ButtonGroup radioGroup = new ButtonGroup();
 		radioGroup.add(designRadioButton);
