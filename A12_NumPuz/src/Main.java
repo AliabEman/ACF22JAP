@@ -1,3 +1,15 @@
+/*
+ *  ---------------------------------------------------------------------
+ JAP COURSE - SCRIPT
+ ASSIGNMENTS - CST8221 - Fall 2022
+ ---------------------------------------------------------------------
+ Begin of Script (Assignments - F22)
+ ---------------------------------------------------------------------
+students: Aliab Eman & Matthew Vecchio
+Student number : 041000420 & 041004137
+ * 
+ */
+
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;

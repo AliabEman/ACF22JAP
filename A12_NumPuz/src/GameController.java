@@ -1,3 +1,15 @@
+/*
+ *  ---------------------------------------------------------------------
+ JAP COURSE - SCRIPT
+ ASSIGNMENTS - CST8221 - Fall 2022
+ ---------------------------------------------------------------------
+ Begin of Script (Assignments - F22)
+ ---------------------------------------------------------------------
+students: Aliab Eman & Matthew Vecchio
+Student number : 041000420 & 041004137
+ * 
+ */
+
 //import javax.swing.JFrame;
 //import javax.swing.JButton;
 //import javax.swing.JComponent;
@@ -14,7 +26,7 @@ public class GameController extends JPanel {
 	private JLabel radioHeader;
 	private JLabel statusLabel;
 	private JPanel controlPanel;
-	
+	private static final String image= "src/numpuz-a12-images/gamelogo.png";
 
 	public GameController() {
 		prepareGame();
@@ -25,9 +37,9 @@ public class GameController extends JPanel {
 	int dimension[]= {3,4,5,6,7,8,9};
 	String gameType[] = {"Number", "Text"};
 	
-	ImageIcon icon = new ImageIcon("numpuz-a12-images/gamelogo.png");
+	ImageIcon icon = new ImageIcon(image);
 	
-	JButton numPuzButton = new JButton("Button", icon);
+	JButton numPuzButton = new JButton("", icon);
 	JButton gameChoice = new JButton("Selection");
 	JButton show = new JButton("Show");
 	JButton hide = new JButton("Hide");
