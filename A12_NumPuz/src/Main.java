@@ -5,8 +5,10 @@ import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-
+//hello
 public class Main extends JFrame{
+
+	private static final long serialVersionUID = 1L;
 
 	public static void main(String[] args) {
 		JFrame main = new JFrame();
