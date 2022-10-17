@@ -1,0 +1,212 @@
+/*
+ *  ---------------------------------------------------------------------
+ JAP COURSE - SCRIPT
+ ASSIGNMENTS - CST8221 - Fall 2022
+ ---------------------------------------------------------------------
+ Begin of Script (Assignments - F22)
+ ---------------------------------------------------------------------
+students: Aliab Eman & Matthew Vecchio
+Student number : 041000420 & 041004137
+ * 
+ */
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+public class GameController extends JPanel {
+	private static final String gameLogo= "src/numpuz-a12-images/gamelogo.png";
+	JFrame mainFrame;
+	JLabel radioHeader;
+	JLabel statusLabel;
+	JPanel controlPanel;
+	JPanel gameFrame;
+	JPanel sideFrame;
+	JMenuBar menuBar;
+	JMenu gameMenu, helpMenu;
+	JMenuItem helpMenuItem1, helpMenuItem2;
+	JMenuItem gameMenuItem1, gameMenuItem2;
+	JButton gameBoard[];
+	ImageIcon gameLogoIcon = new ImageIcon(gameLogo);
+	JButton numPuzButton;
+	JButton gameChoice;
+	JButton show;
+	JButton hide;
+	JButton save;
+	JButton load;
+	JButton random;
+	JButton finish;
+	JRadioButton designRadioButton, playRadioButton;
+	int dimension[]= {3,4,5,6,7,8,9};
+	String gameType[] = {"Number", "Text"};
+	JButton button1;		
+	JButton button2;
+	JButton button3;
+	JButton button4;
+	JButton button5;
+	JButton button6;
+	JButton button7;
+	JButton button8;
+	JButton button9;
+
+	public GameController() {
+		prepareGame();
+		prepareComponentLayouts();
+		gameButtons();
+		gameRadioButton();
+	}
+
+
+	JFrame prepareGame() {
+		this.numPuzButton = new JButton("NumPuz!", gameLogoIcon);
+		this.gameChoice = new JButton("Selection");
+		this.show = new JButton("Show");
+		this.hide = new JButton("Hide");
+		this.save = new JButton("Save");
+		this.load = new JButton("Load");
+		this.random = new JButton("Rand");
+		this.finish = new JButton("Finish");
+		this.mainFrame = new JFrame();
+		mainFrame.setSize(400,400);
+		mainFrame.setLayout(new GridLayout(1,3));
+		this.button1 = new JButton("1");		
+		this.button2 = new JButton("2");
+		this.button3 = new JButton("3");
+		this.button4 = new JButton("4");
+		this.button5 = new JButton("5");
+		this.button6 = new JButton("6");
+		this.button7 = new JButton("7");
+		this.button8 = new JButton("8");
+		this.button9 = new JButton(" ");
+		this.radioHeader = new JLabel();
+		this.statusLabel = new JLabel();
+		this.controlPanel = new JPanel();
+		this.gameMenu = new JMenu("Game");		
+		this.gameMenuItem1 = new JMenuItem("Game Option 1");
+		this.gameMenuItem2 = new JMenuItem("Game Option 2");
+		this.helpMenu = new JMenu("Help");
+		this.helpMenuItem1 = new JMenuItem("Help Option 1");
+		this.helpMenuItem2 = new JMenuItem("Help Option 2");
+
+		mainFrame.add(radioHeader);
+		mainFrame.add(statusLabel);
+		mainFrame.add(controlPanel);
+		mainFrame.setVisible(true);
+		return mainFrame;
+	}
+
+	JFrame prepareComponentLayouts() {
+		mainFrame.setSize(600,600);
+		gameFrame.setSize(400,200);
+		sideFrame.setSize(200,300);
+		gameFrame.setLayout(new GridLayout(3,3));
+		gameFrame.isPreferredSizeSet();
+		mainFrame.setLayout(new GridLayout(1,2));
+		return mainFrame;
+	}
+
+	JFrame gameButtons() {
+		//Control Panel for game
+		controlPanel.setLayout(new FlowLayout());
+		controlPanel.add(numPuzButton);
+		controlPanel.add(gameChoice);
+		controlPanel.add(show);
+		controlPanel.add(hide);
+		controlPanel.add(save);
+		controlPanel.add(load);
+		controlPanel.add(random);
+		controlPanel.add(finish);
+		//Frame for control panel
+		sideFrame.add(controlPanel);
+		//Menu for game
+		gameMenu.add(gameMenuItem1);
+		gameMenu.addSeparator();
+		gameMenu.add(gameMenuItem2);
+		helpMenu.add(helpMenuItem1);
+		helpMenu.addSeparator();
+		helpMenu.add(helpMenuItem2);		
+		menuBar.add(gameMenu);
+		menuBar.add(helpMenu);
+		//Frame for entire UI
+		mainFrame.add(gameFrame);
+		mainFrame.add(sideFrame);
+		mainFrame.add(menuBar);
+		//game buttns
+		gameFrame.add(button1);
+		gameFrame.add(button2);
+		gameFrame.add(button3);
+		gameFrame.add(button4);
+		gameFrame.add(button5);
+		gameFrame.add(button6);
+		gameFrame.add(button7);
+		gameFrame.add(button8);
+		gameFrame.add(button9);
+
+		controlPanel.setVisible(true);
+		menuBar.setVisible(true);
+		mainFrame.setJMenuBar(menuBar);
+		mainFrame.setVisible(true);
+		gameFrame.setVisible(true);
+		sideFrame.setVisible(true);
+		mainFrame.setVisible(true);
+		//sideFrame.add(numPuzSizes.numPuzComboBox);
+		return mainFrame;
+	}
+
+	JFrame gameRadioButton() {
+		radioHeader.setText("Mode:");
+		designRadioButton = new JRadioButton("Design", true);
+		playRadioButton = new JRadioButton("Play");
+
+		designRadioButton.setMnemonic(KeyEvent.VK_C);
+		playRadioButton.setMnemonic(KeyEvent.VK_M);
+
+		designRadioButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {         
+				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
+			}           
+		});
+		playRadioButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {             
+				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
+			}           
+		});
+
+
+		ButtonGroup radioGroup = new ButtonGroup();
+		radioGroup.add(designRadioButton);
+		radioGroup.add(playRadioButton);
+		controlPanel.add(radioHeader);
+		controlPanel.add(designRadioButton);
+		controlPanel.add(playRadioButton);
+		mainFrame.setVisible(true);
+		return mainFrame;
+	}
+
+
+
+
+
+
+
+
+
+//	//JButton gameBoard[][] = null;
+//	//int dimChoice;
+//	//dimChoice=2;
+//
+//
+//	//NumPuzSizeOptions numPuzSizes = new NumPuzSizeOptions();
+//
+//	for (int i = 0; i<dim[dimChoice]; i++) {
+//		for (int j=0; j<dim[dimChoice]; j++) {
+//			gameBoard[i]= new JButton(i + "");
+//		}
+//	}
+
+
+}

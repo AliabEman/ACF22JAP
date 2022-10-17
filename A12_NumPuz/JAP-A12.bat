@@ -21,9 +21,8 @@ SET DOCDIR=doc
 SET DOCPACK=game
 SET DOCOUT=game-javadoc.out
 SET DOCERR=game-javadoc.err
-SET MAINCLASSSRC=src/game/GameBasic.java
+SET MAINCLASSSRC=src/game/Main.java
 SET MAINCLASSBIN=game.GameBasic
-::SET MODULELIST=javafx.controls,javafx.fxml
 
 @echo off
 
@@ -44,8 +43,8 @@ ECHO "1. Compiling ......................"
 javac -Xlint -cp ".;%SRCDIR%/*" %MAINCLASSSRC% -d %BINDIR% > %BINOUT% 2> %BINERR% 
 ::
 
-:: ECHO "Running  ........................."
-:: start java -cp ".;%BINDIR%;/*" %MAINCLASSBIN%
+ ECHO "Running  ........................."
+ start java -cp ".;%BINDIR%;" %MAINCLASSBIN%
 
 ECHO "2. Creating Jar ..................."
 cd bin
@@ -53,7 +52,7 @@ jar cvfe %JARNAME% %MAINCLASSBIN% . > %JAROUT% 2> %JARERR%
 
 ECHO "3. Creating Javadoc ..............."
 cd ..
-javadoc -cp ".;%BINDIR%/*" --add-modules %MODULELIST% -d %DOCDIR% -sourcepath %SRCDIR% -subpackages %DOCPACK% > %DOCOUT% 2> %DOCERR%
+javadoc -cp ".;%BINDIR%/*" -d %DOCDIR% -sourcepath %SRCDIR% -subpackages %DOCPACK% > %DOCOUT% 2> %DOCERR%
 
 cd bin
 ECHO "4. Running Jar ...................."
