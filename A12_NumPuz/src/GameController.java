@@ -146,6 +146,382 @@ public class GameController extends JPanel implements ItemListener {
 	
 	void dimensionChoicesButton(){
 		String dimensionsComboBox[] = {"3","4","5","6","7","8","9"};
+		JButton x0y0 = new JButton("0:0");
+		JButton x0y1 = new JButton("0:1");
+		JButton x0y2 = new JButton("0:2");
+		JButton x0y3 = new JButton("0:3");
+		JButton x0y4 = new JButton("0:4");
+		JButton x0y5 = new JButton("0:5");
+		JButton x0y6 = new JButton("0:6");
+		JButton x0y7 = new JButton("0:7");
+		JButton x0y8 = new JButton("0:8");
+		JButton x1y0 = new JButton("1:0");
+		JButton x1y1 = new JButton("1:1");
+		JButton x1y2 = new JButton("1:2");
+		JButton x1y3 = new JButton("1:3");
+		JButton x1y4 = new JButton("1:4");
+		JButton x1y5 = new JButton("1:5");
+		JButton x1y6 = new JButton("1:6");
+		JButton x1y7 = new JButton("1:7");
+		JButton x1y8 = new JButton("1:8");
+		JButton x2y0 = new JButton("2:0");
+		JButton x2y1 = new JButton("2:1");
+		JButton x2y2 = new JButton("2:2");
+		JButton x2y3 = new JButton("2:3");
+		JButton x2y4 = new JButton("2:4");
+		JButton x2y5 = new JButton("2:5");
+		JButton x2y6 = new JButton("2:6");
+		JButton x2y7 = new JButton("2:7");
+		JButton x2y8 = new JButton("2:8");
+		JButton x3y0 = new JButton("3:0");
+		JButton x3y1 = new JButton("3:1");
+		JButton x3y2 = new JButton("3:2");
+		JButton x3y3 = new JButton("3:3");
+		JButton x3y4 = new JButton("3:4");
+		JButton x3y5 = new JButton("3:5");
+		JButton x3y6 = new JButton("3:6");
+		JButton x3y7 = new JButton("3:7");
+		JButton x3y8 = new JButton("3:8");
+		JButton x4y0 = new JButton("4:0");
+		JButton x4y1 = new JButton("4:1");
+		JButton x4y2 = new JButton("4:2");
+		JButton x4y3 = new JButton("4:3");
+		JButton x4y4 = new JButton("4:4");
+		JButton x4y5 = new JButton("4:5");
+		JButton x4y6 = new JButton("4:6");
+		JButton x4y7 = new JButton("4:7");
+		JButton x4y8 = new JButton("4:8");
+		JButton x5y0 = new JButton("5:0");
+		JButton x5y1 = new JButton("5:1");
+		JButton x5y2 = new JButton("5:2");
+		JButton x5y3 = new JButton("5:3");
+		JButton x5y4 = new JButton("5:4");
+		JButton x5y5 = new JButton("5:5");
+		JButton x5y6 = new JButton("5:6");
+		JButton x5y7 = new JButton("5:7");
+		JButton x5y8 = new JButton("5:8");
+		JButton x6y0 = new JButton("6:0");
+		JButton x6y1 = new JButton("6:1");
+		JButton x6y2 = new JButton("6:2");
+		JButton x6y3 = new JButton("6:3");
+		JButton x6y4 = new JButton("6:4");
+		JButton x6y5 = new JButton("6:5");
+		JButton x6y6 = new JButton("6:6");
+		JButton x6y7 = new JButton("6:7");
+		JButton x6y8 = new JButton("6:8");
+		JButton x7y0 = new JButton("7:0");
+		JButton x7y1 = new JButton("7:1");
+		JButton x7y2 = new JButton("7:2");
+		JButton x7y3 = new JButton("7:3");
+		JButton x7y4 = new JButton("7:4");
+		JButton x7y5 = new JButton("7:5");
+		JButton x7y6 = new JButton("7:6");
+		JButton x7y7 = new JButton("7:7");
+		JButton x7y8 = new JButton("7:8");
+		JButton x8y0 = new JButton("8:0");
+		JButton x8y1 = new JButton("8:1");
+		JButton x8y2 = new JButton("8:2");
+		JButton x8y3 = new JButton("8:3");
+		JButton x8y4 = new JButton("8:4");
+		JButton x8y5 = new JButton("8:5");
+		JButton x8y6 = new JButton("8:6");
+		JButton x8y7 = new JButton("8:7");
+		JButton x8y8 = new JButton("8:8");
+
+
+
+
+
+
+		JButton[] s3 = new JButton[9];
+					s3[0] = x0y0;
+					s3[1] = x0y1;
+					s3[2] = x0y2;
+					s3[3] = x1y0;
+					s3[4] = x1y1;
+					s3[5] = x1y2;
+					s3[6] = x2y0;
+					s3[7] = x2y1;
+					s3[8] = x2y2;
+
+		JButton[] s4 = new JButton[16];
+					s4[0] = x0y0;
+					s4[1] = x0y1;
+					s4[2] = x0y2;
+					s4[3] = x0y3;
+					s4[4] = x1y0;
+					s4[5] = x1y1;
+					s4[6] = x1y2;
+					s4[7] = x1y3;
+					s4[8] = x2y0;
+					s4[9] = x2y1;
+					s4[10] = x2y2;
+					s4[11] = x2y3;
+					s4[12] = x3y0;
+					s4[13] = x3y1;
+					s4[14] = x3y2;
+					s4[15] = x3y3;
+		JButton[] s5 = new JButton[25];
+			s5[0] = x0y0;
+			s5[1] = x0y1;
+			s5[2] = x0y2;
+			s5[3] = x0y3;
+			s5[4] = x0y4;
+			s5[5] = x1y0;
+			s5[6] = x1y1;
+			s5[7] = x1y2;
+			s5[8] = x1y3;
+			s5[9] = x1y4;
+			s5[10] = x2y0;
+			s5[11] = x2y1;
+			s5[12] = x2y2;
+			s5[13] = x2y3;
+			s5[14] = x2y4;
+			s5[15] = x3y0;
+			s5[16] = x3y1;
+			s5[17] = x3y2;
+			s5[18] = x3y3;
+			s5[19] = x3y4;
+			s5[20] = x4y0;
+			s5[21] = x4y1;
+			s5[22] = x4y2;
+			s5[23] = x4y3;
+			s5[24] = x4y4;
+		JButton[] s6 = new JButton[36];
+		s6[0] = x0y0;
+		s6[1] = x0y1;
+		s6[2] = x0y2;
+		s6[3] = x0y3;
+		s6[4] = x0y4;
+		s6[5] = x0y5;
+		s6[6] = x1y0;
+		s6[7] = x1y1;
+		s6[8] = x1y2;
+		s6[9] = x1y3;
+		s6[10] = x1y4;
+		s6[11] = x1y5;
+		s6[12] = x2y0;
+		s6[13] = x2y1;
+		s6[14] = x2y2;
+		s6[15] = x2y3;
+		s6[16] = x2y4;
+		s6[17] = x2y5;
+		s6[18] = x3y0;
+		s6[19] = x3y1;
+		s6[20] = x3y2;
+		s6[21] = x3y3;
+		s6[22] = x3y4;
+		s6[23] = x3y5;
+		s6[24] = x4y0;
+		s6[25] = x4y1;
+		s6[26] = x4y2;
+		s6[27] = x4y3;
+		s6[28] = x4y4;
+		s6[29] = x4y5;
+		s6[30] = x5y0;
+		s6[31] = x5y1;
+		s6[32] = x5y2;
+		s6[33] = x5y3;
+		s6[34] = x5y4;
+		s6[35] = x5y5;
+		JButton[] s7 = new JButton[49];
+		s7[0] = x0y0;
+		s7[1] = x0y1;
+		s7[2] = x0y2;
+		s7[3] = x0y3;
+		s7[4] = x0y4;
+		s7[5] = x0y5;
+		s7[6] = x0y6;
+		s7[7] = x1y0;
+		s7[8] = x1y1;
+		s7[9] = x1y2;
+		s7[10] = x1y3;
+		s7[11] = x1y4;
+		s7[12] = x1y5;
+		s7[13] = x1y6;
+		s7[14] = x2y0;
+		s7[15] = x2y1;
+		s7[16] = x2y2;
+		s7[17] = x2y3;
+		s7[18] = x2y4;
+		s7[19] = x2y5;
+		s7[20] = x2y6;
+		s7[21] = x3y0;
+		s7[22] = x3y1;
+		s7[23] = x3y2;
+		s7[24] = x3y3;
+		s7[25] = x3y4;
+		s7[26] = x3y5;
+		s7[27] = x3y6;
+		s7[28] = x4y0;
+		s7[29] = x4y1;
+		s7[30] = x4y2;
+		s7[31] = x4y3;
+		s7[32] = x4y4;
+		s7[33] = x4y5;
+		s7[34] = x4y6;
+		s7[35] = x5y0;
+		s7[36] = x5y1;
+		s7[37] = x5y2;
+		s7[38] = x5y3;
+		s7[39] = x5y4;
+		s7[40] = x5y5;
+		s7[41] = x5y6;
+		s7[42] = x6y0;
+		s7[43] = x6y1;
+		s7[44] = x6y2;
+		s7[45] = x6y3;
+		s7[46] = x6y4;
+		s7[47] = x6y5;
+		s7[48] = x6y6;
+		JButton[] s8 = new JButton[64];
+		s8[0] = x0y0;
+		s8[1] = x0y1;
+		s8[2] = x0y2;
+		s8[3] = x0y3;
+		s8[4] = x0y4;
+		s8[5] = x0y5;
+		s8[6] = x0y6;
+		s8[7] = x0y7;
+		s8[8] = x1y0;
+		s8[9] = x1y1;
+		s8[10] = x1y2;
+		s8[11] = x1y3;
+		s8[12] = x1y4;
+		s8[13] = x1y5;
+		s8[14] = x1y6;
+		s8[15] = x1y7;
+		s8[16] = x2y0;
+		s8[17] = x2y1;
+		s8[18] = x2y2;
+		s8[19] = x2y3;
+		s8[20] = x2y4;
+		s8[21] = x2y5;
+		s8[22] = x2y6;
+		s8[23] = x2y7;
+		s8[24] = x3y0;
+		s8[25] = x3y1;
+		s8[26] = x3y2;
+		s8[27] = x3y3;
+		s8[28] = x3y4;
+		s8[29] = x3y5;
+		s8[30] = x3y6;
+		s8[31] = x3y7;
+		s8[32] = x4y0;
+		s8[33] = x4y1;
+		s8[34] = x4y2;
+		s8[35] = x4y3;
+		s8[36] = x4y4;
+		s8[37] = x4y5;
+		s8[38] = x4y6;
+		s8[39] = x4y7;
+		s8[40] = x5y0;
+		s8[41] = x5y1;
+		s8[42] = x5y2;
+		s8[43] = x5y3;
+		s8[44] = x5y4;
+		s8[45] = x5y5;
+		s8[46] = x5y6;
+		s8[47] = x5y7;
+		s8[48] = x6y0;
+		s8[49] = x6y1;
+		s8[50] = x6y2;
+		s8[51] = x6y3;
+		s8[52] = x6y4;
+		s8[53] = x6y5;
+		s8[54] = x6y6;
+		s8[55] = x6y7;
+		s8[56] = x7y0;
+		s8[57] = x7y1;
+		s8[58] = x7y2;
+		s8[59] = x7y3;
+		s8[60] = x7y4;
+		s8[61] = x7y5;
+		s8[62] = x7y6;
+		s8[63] = x7y7;
+		JButton[] s9 = new JButton[81];
+		s9[0] = x0y0;
+		s9[1] = x0y1;
+		s9[2] = x0y2;
+		s9[3] = x0y3;
+		s9[4] = x0y4;
+		s9[5] = x0y5;
+		s9[6] = x0y6;
+		s9[7] = x0y7;
+		s9[8] = x0y8;
+		s9[9] = x1y0;
+		s9[10] = x1y1;
+		s9[11] = x1y2;
+		s9[12] = x1y3;
+		s9[13] = x1y4;
+		s9[14] = x1y5;
+		s9[15] = x1y6;
+		s9[16] = x1y7;
+		s9[17] = x1y8;
+		s9[18] = x2y0;
+		s9[19] = x2y1;
+		s9[20] = x2y2;
+		s9[21] = x2y3;
+		s9[22] = x2y4;
+		s9[23] = x2y5;
+		s9[24] = x2y6;
+		s9[25] = x2y7;
+		s9[26] = x2y8;
+		s9[27] = x3y0;
+		s9[28] = x3y1;
+		s9[29] = x3y2;
+		s9[30] = x3y3;
+		s9[31] = x3y4;
+		s9[32] = x3y5;
+		s9[33] = x3y6;
+		s9[34] = x3y7;
+		s9[35] = x3y8;
+		s9[36] = x4y0;
+		s9[37] = x4y1;
+		s9[38] = x4y2;
+		s9[39] = x4y3;
+		s9[40] = x4y4;
+		s9[41] = x4y5;
+		s9[42] = x4y6;
+		s9[43] = x4y7;
+		s9[44] = x4y8;
+		s9[45] = x5y0;
+		s9[46] = x5y1;
+		s9[47] = x5y2;
+		s9[48] = x5y3;
+		s9[49] = x5y4;
+		s9[50] = x5y5;
+		s9[51] = x5y6;
+		s9[52] = x5y7;
+		s9[53] = x5y8;
+		s9[54] = x6y0;
+		s9[55] = x6y1;
+		s9[56] = x6y2;
+		s9[57] = x6y3;
+		s9[58] = x6y4;
+		s9[59] = x6y5;
+		s9[60] = x6y6;
+		s9[61] = x6y7;
+		s9[62] = x6y8;
+		s9[63] = x7y0;
+		s9[64] = x7y1;
+		s9[65] = x7y2;
+		s9[66] = x7y3;
+		s9[67] = x7y4;
+		s9[68] = x7y5;
+		s9[69] = x7y6;
+		s9[70] = x7y7;
+		s9[71] = x7y8;
+		s9[72] = x8y0;
+		s9[73] = x8y1;
+		s9[74] = x8y2;
+		s9[75] = x8y3;
+		s9[76] = x8y4;
+		s9[77] = x8y5;
+		s9[78] = x8y6;
+		s9[79] = x8y7;
+		s9[80] = x8y8;
+
 		dimensionChoices = new JComboBox(dimensionsComboBox);
 		//dimensionsComboBox.addItemListener(s);
 
@@ -158,63 +534,159 @@ public class GameController extends JPanel implements ItemListener {
 		dimensionChoices.addActionListener(new ActionListener() {     
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			   int x = 9;
 			   System.out.println("Value: " + dimensionChoices.getSelectedItem().toString());
-			   for (int i = 0; i < x; i++) {
-				for (int j = 0; j < x; j++) {
-					gamePanel.remove(gamePanel);
-					gamePanel.revalidate();
-            		gamePanel.repaint();
-				}
-			}
+
+			   
+			   gamePanel.revalidate();
+			   gamePanel.repaint();
+
+
+		  
 			   if(dimensionChoices.getSelectedItem().toString().equals("3")){
 				   gameButtons("3");
+				  
 				   int n = 3;
+				   int v = 9;
 				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
-				   int count = 1;
+				   int count = 0;
 				   mainFrame.add(gamePanel);
+				   
 				   for (int i = 0; i < n; i++) {
-				   	for (int j = 0; j < n; j++) {
-						gamePanel.add(new JButton(""+count++), BorderLayout.CENTER);
-						gamePanel.revalidate();
-            			gamePanel.repaint();
-				   	}
-					}
-			   }
+						for (int j = 0; j < n; j++) {
+				   			gamePanel.add(s3[+count++],BorderLayout.CENTER);
+							   //Component.setVisible(s3[+count++]);
+							for (int q = 1; q == v; q++) {
+								gamePanel.setComponentZOrder(s3[i],q);
+								s3[q].setVisible(true);
+							}
+						    gamePanel.revalidate();
+							gamePanel.repaint();
+							//s3[q].setVisible(true);
+							
+							
+							
+				  
+						}
+				   }
+				   
+				}
+
 			   else if(dimensionChoices.getSelectedItem().toString().equals("4")){
 				   gameButtons("4");
+				   gamePanel.removeAll();
 				   int n = 4;
 				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
-				   int count = 1;
+				   int count = 0;
 				   mainFrame.add(gamePanel);
+				   int v = 16;
 				   for (int i = 0; i < n; i++) {
-				   	for (int j = 0; j < n; j++) {
-						gamePanel.add(new JButton(""+count++), BorderLayout.CENTER);
-						gamePanel.revalidate();
-            			gamePanel.repaint();
-				   	}
-					}
+						for (int j = 0; j < n; j++) {
+							gamePanel.add(s4[+count++],BorderLayout.CENTER);
+							for (int q = 1; q == v; q++) {
+								gamePanel.setComponentZOrder(s4[i],q);
+								s4[q].setVisible(true);
+							}
+						    gamePanel.revalidate();
+							gamePanel.repaint();
+							gamePanel.setComponentZOrder(s4[i],j);
+				  
+						}
+				   }
+					
 			   }
 			   else if(dimensionChoices.getSelectedItem().toString().equals("5")){
 				   gameButtons("5");
-				   option(5);
+				   //option(5);
+				   int n = 5;
+				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
+				   int count = 0;
+				   mainFrame.add(gamePanel);
+				   for (int i = 0; i < n; i++) {
+						for (int j = 0; j < n; j++) {
+							gamePanel.add(s5[+count++],BorderLayout.CENTER);
+						    gamePanel.revalidate();
+							gamePanel.repaint();
+							gamePanel.setComponentZOrder(s5[i],j);
+				  
+						}
+				   }
+
 			   }
 			   else if(dimensionChoices.getSelectedItem().toString().equals("6")){
 				   gameButtons("6");
+				   int n = 6;
+				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
+				   int count = 0;
+				   mainFrame.add(gamePanel);
+				   for (int i = 0; i < n; i++) {
+						for (int j = 0; j < n; j++) {
+							gamePanel.add(s6[+count++],BorderLayout.CENTER);
+						    gamePanel.revalidate();
+							gamePanel.repaint();
+							gamePanel.setComponentZOrder(s6[i],j);
+				  
+						}
+				   }
+
 			   }
 			   else if(dimensionChoices.getSelectedItem().toString().equals("7")){
 				   gameButtons("7");
+				   int n = 7;
+				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
+				   int count = 0;
+				   mainFrame.add(gamePanel);
+				   for (int i = 0; i < n; i++) {
+						for (int j = 0; j < n; j++) {
+							gamePanel.add(s7[+count++],BorderLayout.CENTER);
+						    gamePanel.revalidate();
+							gamePanel.repaint();
+							gamePanel.setComponentZOrder(s7[i],j);
+				  
+						}
+				   }
+
 			   }
 			   else if(dimensionChoices.getSelectedItem().toString().equals("8")){
 				   gameButtons("8");
+				   int n = 8;
+				   int t = 64;
+				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
+				   int count = 0;
+				   mainFrame.add(gamePanel);
+				   for (int i = 0; i < t; i++) {
+						for (int j = 0; j < t; j++) {
+							gamePanel.add(s8[i],BorderLayout.CENTER);
+						    gamePanel.revalidate();
+							gamePanel.repaint();
+							
+							gamePanel.setComponentZOrder(s8[i],j);
+							System.out.print(getComponentZOrder(gamePanel));
+						}
+				   }
+
 			   }
 			   else if(dimensionChoices.getSelectedItem().toString().equals("9")){
 				   gameButtons("9");
+				   int n = 9;
+				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
+				   int count = 0;
+				   mainFrame.add(gamePanel);
+				   for (int i = 0; i < n; i++) {
+						for (int j = 0; j < n; j++) {
+							gamePanel.add(s9[+count++],BorderLayout.CENTER);
+						    gamePanel.revalidate();
+							gamePanel.repaint();
+							gamePanel.setComponentZOrder(s9[i],j);
+				  
+						}
+				   }
+
 			   }
+			   gamePanel.revalidate();
+               gamePanel.repaint();
 			   //option(dimensionChoices.getSelectedItem());
 			}
 		});
-
 	}
 	/*public void itemStateChanged(ItemEvent e){
 		if (e.getSource() == dimensionChoices) {
@@ -383,6 +855,13 @@ public class GameController extends JPanel implements ItemListener {
 				}
 			}
 		}
+	}
+
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
