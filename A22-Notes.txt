@@ -1,0 +1,11 @@
+-You must use MVC
+-You can lose marks for missing features (ex: timer, colors)
+-we are free to define some points
+-we must have all functionalities available
+-use A21 which defines your elements to move forward in A22
+-need to show our data
+-A31 is supposed to use Client-Server Communications**
+-submit your code with scripts
+
+
+-make sure A22 is perfect, because A31-32 has difficulties to be expected to deal with.

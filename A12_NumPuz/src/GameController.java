@@ -6,7 +6,7 @@
  Begin of Script (Assignments - F22)
  ---------------------------------------------------------------------
 students: Aliab Eman & Matthew Vecchio
-Student number : 041000420 & 041004137
+Student numbers : 041000420 & 041004137
  * 
  */
 
@@ -17,12 +17,15 @@ import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonAreaLayout;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 import javax.swing.*;
 
 
-public class GameController extends JPanel {
+public class GameController extends JPanel implements ItemListener, ActionListener{
 	private static final String gameLogo= "src/numpuz-a12-images/gamelogo.png";
 	private static final String newGameLogo= "src/numpuz-a12-images/iconnew.png";
 	private static final String solutionGameLogo= "src/numpuz-a12-images/iconsol.png";
@@ -64,20 +67,27 @@ public class GameController extends JPanel {
 	JButton finish;
 	JRadioButton designRadioButton, playRadioButton;
 	JComboBox dimensionChoices;
+	String dimensionsComboBox[] = {"3","4","5","6","7","8","9"}; 
+
 	int dimension[]= {3,4,5,6,7,8,9}; //affects size of puzzle pieces
 	String gameType[] = {"Number", "Text"};
 
 
+
+
 	public GameController() {
-
+		instantiateGamePieces();
+		//game.gameButtons();
+		preparePanelLayouts();
+		gameControlPanel();
+		gameRadioButton();
 	}
-
 
 	boolean instantiateGamePieces() {
 		mainFrame = new JFrame();
-		controlPanel = new JPanel(new BorderLayout());
-		gamePanel = new JPanel(new GridLayout(dimension[3], dimension[3])); //need to replace with dynamic array for sizing
 
+		controlPanel = new JPanel(new BorderLayout());
+		gamePanel = new JPanel(new GridLayout(3, 3)); //need to replace with dynamic array for sizing
 
 		controlPanelGridBag = new GridBagConstraints();
 
@@ -102,7 +112,10 @@ public class GameController extends JPanel {
 
 		menuBar = new JMenuBar();
 
-		gameMenu = new JMenu("Game");		
+
+		gameMenu = new JMenu("Game");	
+
+
 		gameMenuItem1 = new JMenuItem("New", newLogoIcon);
 		gameMenuItem2 = new JMenuItem("Solution", solutionLogoIcon);
 		gameMenuItem3 = new JMenuItem("Exit", exitLogoIcon);
@@ -126,14 +139,16 @@ public class GameController extends JPanel {
 	//Frame for entire UI
 	JFrame preparePanelLayouts() {
 		mainFrame.setLayout(new BorderLayout());
-		mainFrame.setSize(650,600);
-		mainFrame.getPreferredSize();
+		mainFrame.setSize(800,600);
+		//mainFrame.getPreferredSize();
 		mainFrame.setBackground(Color.GREEN); 
-		mainFrame.setResizable(false);
-
-		controlPanel.setSize(100,400);
-		controlPanel.setBackground(Color.YELLOW);	
+		mainFrame.setResizable(true);
+		
 		controlPanel.setLayout(new GridBagLayout());
+		controlPanel.setSize(200,600);
+		controlPanel.setBackground(Color.YELLOW);	
+		
+		gamePanel.setSize(400, 600);
 
 		mainFrame.add(controlPanel, BorderLayout.EAST);
 		mainFrame.add(gamePanel, BorderLayout.WEST);
@@ -143,16 +158,39 @@ public class GameController extends JPanel {
 
 		return mainFrame;
 	}
-	
-	void dimensionChoicesButton(){
-		String dimensionsComboBox[] = {"3","4","5","6","7","8","9"};
+
+	public void dimensionChoicesButton(){
+
 		dimensionChoices = new JComboBox(dimensionsComboBox);
 		dimensionChoices.setBounds(50,50,90,20);
 		dimensionChoices.setSelectedIndex(0);
 		controlPanelGridBag.gridx = 1;
 		controlPanel.add(dimensionChoices, controlPanelGridBag);
-		String choice = (String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex());
-		gameButtons(choice);
+		gameButtons((String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()));
+		System.out.println("Started a game");
+		dimensionChoices.addItemListener( new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					System.out.println("Changed dimension Choice to " + (String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()) + 
+							"x" + (String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()) + " Game Board");
+					gamePanel.removeAll();
+					gameButtons((String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()));
+
+					//					mainFrame.remove(gamePanel);
+					//					mainFrame.add(gamePanel, BorderLayout.WEST);
+					//					gameButtons((String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()));	
+					//gamePanel.revalidate();
+					//gamePanel.repaint();
+				}		
+				else {
+					gamePanel.setVisible(true);
+				}
+			}
+		});
+	}
+
+	public void actionPerformed(ActionEvent e) {
+
 	}
 
 	JFrame gameControlPanel() {
@@ -238,7 +276,7 @@ public class GameController extends JPanel {
 	}
 
 	void gameRadioButton() {
-//		radioHeader.setText("Mode:");
+		//		radioHeader.setText("Mode:");
 		designRadioButton = new JRadioButton("Design", true);
 		playRadioButton = new JRadioButton("Play");
 
@@ -273,8 +311,12 @@ public class GameController extends JPanel {
 	}
 
 	void gameButtons(String dimensionChosen) {
-		int n = 3;
-		
+		int n = 3; //default size
+		int count;
+		JButton button;
+		Random randomNum = new Random();	
+
+
 		if (dimensionChosen == "3") {
 			n = dimension[0];
 		}
@@ -297,23 +339,48 @@ public class GameController extends JPanel {
 			n = dimension[6];
 		}	
 
-		gamePanel = new JPanel(new GridLayout(dimension[n], dimension[n])); //need to replace with dynamic array for sizing
-		int count = 1;
+		count = n*n;
+		
+		
+		mainFrame.remove(gamePanel);
+		gamePanel = new JPanel(new GridLayout(n,n));
 		mainFrame.add(gamePanel);
-		for (int i = 0; i < dimension[n]; i++) {
-			for (int j = 0; j < dimension[n]; j++) {
-				gamePanel.add(new JButton(""+count++), BorderLayout.CENTER);
-			}
+
+		String[] gameButtons = new String[count];
+		
+		for (int i = 0; i < count - 1; i++) {
+			
+
+			gameButtons[i] = randomNum.nextInt(count) +1 + "";
+			
+			button = new JButton(gameButtons[i]);
+			button.setSize(1/n, 1/n);
+			
+			gamePanel.add(button, BorderLayout.CENTER);
+			gamePanel.setVisible(true);
 		}
+		gamePanel.add(new JButton(gameButtons[count - 1] = " "));
+		gamePanel.setVisible(true);
+
+
+
+
+		//		for (int i = 0; i < n; i++) {
+		//			for (int j = 0; j < n; j++) {
+		//
+		//
+		//				if (buttonCounter == count) {
+		//					break;
+		//				}
+		//				buttonCounter++;
+		//			}
+		//		}
 	}
 
+	public void itemStateChanged(ItemEvent e) {
+		// TODO Auto-generated method stub
 
-
-
-
-
-
-
+	}
 
 	//	//JButton gameBoard[][] = null;
 	//	//int dimChoice;
