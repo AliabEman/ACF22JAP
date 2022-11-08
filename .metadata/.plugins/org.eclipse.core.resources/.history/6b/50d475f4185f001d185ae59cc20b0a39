@@ -279,24 +279,15 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 			System.out.println("Clicked Finish");
 
 		}
-		if (action.equals("Design")){
-			System.out.println("Clicked Design Mode");
-
-		}		
-		if (action.equals("Play")){
-			System.out.println("Clicked Play Mode");
-
-		}
 
 	}
 
 	JFrame gameControlPanel() {
 		//setup for NumPuz icon-button
-		controlPanelGridBag.fill = GridBagConstraints.HORIZONTAL;
+		controlPanelGridBag.fill = GridBagConstraints.NORTH;
 		controlPanelGridBag.gridx = 0;
 		controlPanelGridBag.gridy = 0;
-		controlPanelGridBag.weightx = 2;
-		controlPanelGridBag.gridheight = 1;
+		controlPanelGridBag.gridheight = 2;
 		controlPanel.add(numPuzButton, controlPanelGridBag);
 
 
@@ -379,20 +370,18 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		playRadioButton = new JRadioButton("Play");
 
 		designRadioButton.setMnemonic(KeyEvent.VK_C);
-		designRadioButton.addActionListener(this);
 		playRadioButton.setMnemonic(KeyEvent.VK_M);
-		playRadioButton.addActionListener(this);
 
-		//		designRadioButton.addItemListener(new ItemListener() {
-		//			public void itemStateChanged(ItemEvent e) {         
-		//				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
-		//			}           
-		//		});
-		//		playRadioButton.addItemListener(new ItemListener() {
-		//			public void itemStateChanged(ItemEvent e) {             
-		//				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
-		//			}           
-		//		});
+		designRadioButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {         
+				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
+			}           
+		});
+		playRadioButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {             
+				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
+			}           
+		});
 
 		ButtonGroup radioGroup = new ButtonGroup();
 		radioGroup.add(designRadioButton);
@@ -455,21 +444,13 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 
 			button = new JButton(gameButtons[i]);
 			button.setSize(1/n, 1/n);
-			button.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent ae) {
-					System.out.println("Clicked game button");
-				}
-			});
+			button.addActionListener(this);
 
 			gamePanel.add(button, BorderLayout.CENTER);
 			gamePanel.setVisible(true);
 		}
 		button = new JButton(gameButtons[count-1] = "");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Clicked game button");
-			}
-		});
+		button.addActionListener(this);
 		button.setBackground(Color.BLACK);
 		gamePanel.add(button);
 		gamePanel.setVisible(true);

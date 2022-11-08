@@ -15,8 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonAreaLayout;
 
-import javafx.scene.effect.ColorAdjust;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashSet;
@@ -88,9 +86,7 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 	}
 
 	public void splashScreen() {
-		JFrame window = new JFrame("Algonquin College - NumPuz");
-		window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		window.setName("Algonquin College - NumPuz");
+		JWindow window = new JWindow();
 		window.getContentPane().add(new JLabel("NumPuz", new ImageIcon(splashGameLogo), SwingConstants.CENTER));
 		window.setBounds(0, 0, 500, 500);
 		window.setVisible(true);
@@ -105,8 +101,6 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 
 	boolean instantiateGamePieces() {
 		mainFrame = new JFrame();
-		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
 
 		controlPanel = new JPanel(new BorderLayout());
 		gamePanel = new JPanel(new GridLayout(3, 3)); //need to replace with dynamic array for sizing
@@ -134,38 +128,27 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 
 		menuBar = new JMenuBar();
 
+
 		gameMenu = new JMenu("Game");	
 
+
 		gameMenuItem1 = new JMenuItem("New", newLogoIcon);
-		gameMenuItem1.addActionListener(this);
 		gameMenuItem2 = new JMenuItem("Solution", solutionLogoIcon);
-		gameMenuItem2.addActionListener(this);
 		gameMenuItem3 = new JMenuItem("Exit", exitLogoIcon);
-		gameMenuItem3.addActionListener(this);
 
 		helpMenu = new JMenu("Help");
 		helpMenuItem1 = new JMenuItem("Colors", colorsLogoIcon);
-		helpMenuItem1.addActionListener(this);
 		helpMenuItem2 = new JMenuItem("About", aboutLogoIcon);
-		helpMenuItem2.addActionListener(this);
 
-		numPuzButton = new JButton("NumPuz!", gameLogoIcon);
-		numPuzButton.addActionListener(this);
+		numPuzButton = new JButton(gameLogoIcon);
 		gameChoice = new JButton("Selection");
-		gameChoice.addActionListener(this);
-
 		show = new JButton("Show");
-		show.addActionListener(this);
 		hide = new JButton("Hide");
-		hide.addActionListener(this);
 		save = new JButton("Save");
-		save.addActionListener(this);
 		load = new JButton("Load");
-		load.addActionListener(this);
 		random = new JButton("Rand");
-		random.addActionListener(this);
 		finish = new JButton("Finish");
-		finish.addActionListener(this);
+
 		return true;
 	}
 
@@ -175,7 +158,7 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		mainFrame.setSize(800,600);
 		//mainFrame.getPreferredSize();
 		mainFrame.setBackground(Color.GREEN); 
-		mainFrame.setResizable(false);
+		mainFrame.setResizable(true);
 
 		controlPanel.setLayout(new GridBagLayout());
 		controlPanel.setSize(200,600);
@@ -223,80 +206,15 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		String action = e.getActionCommand();
-		if (action.equals("New")){
-			System.out.println("Clicked New");
-		}
-		if (action.equals("Solution")){
-			System.out.println("Clicked Solution");
-
-		}
-		if (action.equals("Exit")){
-			System.out.println("Clicked Exit");
-
-		}
-		if (action.equals("Help")){
-			System.out.println("Clicked Help");
-
-		}
-		if (action.equals("Colors")){
-			System.out.println("Clicked Colors");
-
-		}
-		if (action.equals("About")){
-			System.out.println("Clicked About");
-
-		}
-		if (action.equals("NumPuz!")){
-			System.out.println("Clicked NumPuz!");
-
-		}
-		if (action.equals("Selection")){
-			System.out.println("Clicked Selection");
-
-		}
-		if (action.equals("Show")){
-			System.out.println("Clicked Show");
-
-		}
-		if (action.equals("Hide")){
-			System.out.println("Clicked Hide");
-
-		}
-		if (action.equals("Save")){
-			System.out.println("Clicked Save");
-
-		}		
-		if (action.equals("Load")){
-			System.out.println("Clicked Load");
-
-		}
-		if (action.equals("Rand")){
-			System.out.println("Clicked Rand");
-
-		}		
-		if (action.equals("Finish")){
-			System.out.println("Clicked Finish");
-
-		}
-		if (action.equals("Design")){
-			System.out.println("Clicked Design Mode");
-
-		}		
-		if (action.equals("Play")){
-			System.out.println("Clicked Play Mode");
-
-		}
 
 	}
 
 	JFrame gameControlPanel() {
 		//setup for NumPuz icon-button
-		controlPanelGridBag.fill = GridBagConstraints.HORIZONTAL;
+		controlPanelGridBag.fill = GridBagConstraints.NORTH;
 		controlPanelGridBag.gridx = 0;
 		controlPanelGridBag.gridy = 0;
-		controlPanelGridBag.weightx = 2;
-		controlPanelGridBag.gridheight = 1;
+		controlPanelGridBag.gridheight = 2;
 		controlPanel.add(numPuzButton, controlPanelGridBag);
 
 
@@ -379,20 +297,18 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		playRadioButton = new JRadioButton("Play");
 
 		designRadioButton.setMnemonic(KeyEvent.VK_C);
-		designRadioButton.addActionListener(this);
 		playRadioButton.setMnemonic(KeyEvent.VK_M);
-		playRadioButton.addActionListener(this);
 
-		//		designRadioButton.addItemListener(new ItemListener() {
-		//			public void itemStateChanged(ItemEvent e) {         
-		//				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
-		//			}           
-		//		});
-		//		playRadioButton.addItemListener(new ItemListener() {
-		//			public void itemStateChanged(ItemEvent e) {             
-		//				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
-		//			}           
-		//		});
+		designRadioButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {         
+				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
+			}           
+		});
+		playRadioButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {             
+				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
+			}           
+		});
 
 		ButtonGroup radioGroup = new ButtonGroup();
 		radioGroup.add(designRadioButton);
@@ -455,23 +371,11 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 
 			button = new JButton(gameButtons[i]);
 			button.setSize(1/n, 1/n);
-			button.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent ae) {
-					System.out.println("Clicked game button");
-				}
-			});
 
 			gamePanel.add(button, BorderLayout.CENTER);
 			gamePanel.setVisible(true);
 		}
-		button = new JButton(gameButtons[count-1] = "");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Clicked game button");
-			}
-		});
-		button.setBackground(Color.BLACK);
-		gamePanel.add(button);
+		gamePanel.add(new JButton(gameButtons[count - 1] = " "));
 		gamePanel.setVisible(true);
 
 

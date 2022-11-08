@@ -292,11 +292,11 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 
 	JFrame gameControlPanel() {
 		//setup for NumPuz icon-button
-		controlPanelGridBag.fill = GridBagConstraints.HORIZONTAL;
+		controlPanelGridBag.fill = GridBagConstraints.NORTH;
 		controlPanelGridBag.gridx = 0;
 		controlPanelGridBag.gridy = 0;
-		controlPanelGridBag.weightx = 2;
-		controlPanelGridBag.gridheight = 1;
+		controlPanelGridBag.gridheight = 2;
+		controlPanelGridBag.gridwidth = 1;
 		controlPanel.add(numPuzButton, controlPanelGridBag);
 
 
