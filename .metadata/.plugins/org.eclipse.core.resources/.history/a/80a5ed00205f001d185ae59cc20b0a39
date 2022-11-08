@@ -181,9 +181,7 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		controlPanel.setSize(200,600);
 		controlPanel.setBackground(Color.YELLOW);	
 
-		gamePanel.setLayout(new BorderLayout());
 		gamePanel.setSize(600, 600);
-		gamePanel.setBackground(Color.MAGENTA);
 
 		mainFrame.add(controlPanel, BorderLayout.EAST);
 		mainFrame.add(gamePanel, BorderLayout.WEST);
@@ -448,37 +446,33 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		gamePanel = new JPanel(new GridLayout(n,n));
 		mainFrame.add(gamePanel);
 
-		String[][] gameButtons = new String[n][n];
+		String[] gameButtons = new String[count];
 
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				if (i == n-1 && j == n-1) {
-					gameButtons[i][j] = "";
-					button = new JButton(gameButtons[i][j]);	
-					button.setBackground(Color.BLACK);
-					System.out.println(gameButtons[i][j]);
+		for (int i = 0; i < count - 1; i++) {
+
+
+			gameButtons[i] = randomNum.nextInt(count) +1 + "";
+
+			button = new JButton(gameButtons[i]);
+			button.setSize(1/n, 1/n);
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent ae) {
+					System.out.println("Clicked game button");
 				}
-				else {				
-					gameButtons[i][j] = randomNum.nextInt(count) +1 + "";
-					button = new JButton(gameButtons[i][j]);	
-					System.out.println(gameButtons[i][j]);
-				}
+			});
 
-				button.setSize(1/n, 1/n);
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent ae) {
-						System.out.println("Clicked game button");
-					}
-				});
-						gamePanel.add(button);
-		gamePanel.setVisible(true);
-		}		
-
-
+			gamePanel.add(button, BorderLayout.CENTER);
+			gamePanel.setVisible(true);
 		}
-
-		
-		
+		button = new JButton(gameButtons[count-1] = "");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Clicked game button");
+			}
+		});
+		button.setBackground(Color.BLACK);
+		gamePanel.add(button);
+		gamePanel.setVisible(true);
 
 
 

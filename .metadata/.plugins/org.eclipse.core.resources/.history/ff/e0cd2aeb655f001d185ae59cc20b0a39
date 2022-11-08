@@ -453,14 +453,14 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				if (i == n-1 && j == n-1) {
-					gameButtons[i][j] = "";
 					button = new JButton(gameButtons[i][j]);	
+					gameButtons[i][j] = "";
 					button.setBackground(Color.BLACK);
 					System.out.println(gameButtons[i][j]);
 				}
 				else {				
-					gameButtons[i][j] = randomNum.nextInt(count) +1 + "";
 					button = new JButton(gameButtons[i][j]);	
+					gameButtons[i][j] = randomNum.nextInt(count) +1 + "";
 					System.out.println(gameButtons[i][j]);
 				}
 
