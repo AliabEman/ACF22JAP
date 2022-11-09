@@ -14,8 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonAreaLayout;
-
-import javafx.scene.effect.ColorAdjust;
+import java.util.*;
+//import javafx.scene.effect.ColorAdjust;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -28,13 +28,13 @@ import javax.swing.*;
 
 
 public class GameController extends JPanel implements ItemListener, ActionListener{
-	private static final String gameLogo= "src/numpuz-a12-images/gamelogo.png";
-	private static final String newGameLogo= "src/numpuz-a12-images/iconnew.png";
-	private static final String solutionGameLogo= "src/numpuz-a12-images/iconsol.png";
-	private static final String exitGameLogo= "src/numpuz-a12-images/iconext.png";
-	private static final String colorsGameLogo= "src/numpuz-a12-images/iconcol.png";
-	private static final String aboutGameLogo= "src/numpuz-a12-images/iconabt.png";
-	private static final String splashGameLogo= "src/numpuz-a12-images/game.png";
+	private static final String gameLogo= "A12_Numpuzz/src/numpuz-a12-images/gamelogo.png";
+	private static final String newGameLogo= "A12_Numpuzz/src/numpuz-a12-images/iconnew.png";
+	private static final String solutionGameLogo= "A12_Numpuzz/src/numpuz-a12-images/iconsol.png";
+	private static final String exitGameLogo= "A12_Numpuzz/src/numpuz-a12-images/iconext.png";
+	private static final String colorsGameLogo= "A12_Numpuzz/src/numpuz-a12-images/iconcol.png";
+	private static final String aboutGameLogo= "A12_Numpuzz/src/numpuz-a12-images/iconabt.png";
+	private static final String splashGameLogo= "A12_Numpuzz/src/numpuz-a12-images/game.png";
 	int WIDTH = 1;
 	int HEIGHT = 1;	
 	ImageIcon gameLogoIcon;
@@ -87,20 +87,22 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		gameRadioButton();
 	}
 
-	public void splashScreen() {
+	public Runnable splashScreen() {
 		JFrame window = new JFrame("Algonquin College - NumPuz");
 		window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		window.setName("Algonquin College - NumPuz");
 		window.getContentPane().add(new JLabel("NumPuz", new ImageIcon(splashGameLogo), SwingConstants.CENTER));
 		window.setBounds(0, 0, 500, 500);
 		window.setVisible(true);
+		window.setLocationRelativeTo(null);
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		window.setVisible(false);
+		window.setVisible(true);
 		window.dispose();
+		return null;
 	}
 
 	boolean instantiateGamePieces() {
@@ -172,7 +174,8 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 	//Frame for entire UI
 	JFrame preparePanelLayouts() {
 		mainFrame.setLayout(new BorderLayout());
-		mainFrame.setSize(800,600);
+		mainFrame.setSize(950,750);
+		mainFrame.setLocationRelativeTo(null);
 		//mainFrame.getPreferredSize();
 		mainFrame.setBackground(Color.GREEN); 
 		mainFrame.setResizable(false);
@@ -220,6 +223,9 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 				else {
 					gamePanel.setVisible(true);
 				}
+				gamePanel.setVisible(true);
+				gamePanel.revalidate();
+				gamePanel.repaint();
 			}
 		});
 	}
@@ -235,6 +241,8 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		}
 		if (action.equals("Exit")){
 			System.out.println("Clicked Exit");
+			System.out.println("GOODBYE!!!");
+			System.exit(0);
 
 		}
 		if (action.equals("Help")){
@@ -251,18 +259,37 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		}
 		if (action.equals("NumPuz!")){
 			System.out.println("Clicked NumPuz!");
+			//Thread t1 = new Thread(splashScreen());
+			Thread getSplash = new Thread(new Runnable() {
+				public void run() {
+					/*try {
+						Thread.sleep(x);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}*/
+					splashScreen();
 
-		}
+			}
+			});
+	}
+			
 		if (action.equals("Selection")){
 			System.out.println("Clicked Selection");
 
 		}
 		if (action.equals("Show")){
 			System.out.println("Clicked Show");
+			gamePanel.setVisible(true);
+			gamePanel.revalidate();
+			gamePanel.repaint();
+
 
 		}
 		if (action.equals("Hide")){
 			System.out.println("Clicked Hide");
+			gamePanel.setVisible(false);
+			gamePanel.revalidate();
+			gamePanel.repaint();
 
 		}
 		if (action.equals("Save")){
@@ -275,6 +302,10 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		}
 		if (action.equals("Rand")){
 			System.out.println("Clicked Rand");
+			gameButtons((String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()));
+			gamePanel.setVisible(true);
+			gamePanel.revalidate();
+			gamePanel.repaint();
 
 		}		
 		if (action.equals("Finish")){
@@ -369,7 +400,7 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		menuBar.setVisible(true);
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.setVisible(true);
-		gamePanel.setVisible(true);
+		gamePanel.setVisible(false);
 		mainFrame.setVisible(true);
 		//gamePanel.add(numPuzSizes.numPuzComboBox);
 		return mainFrame;
@@ -471,7 +502,7 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 					}
 				});
 						gamePanel.add(button);
-		gamePanel.setVisible(true);
+		gamePanel.setVisible(false);
 		}		
 
 
