@@ -28,13 +28,13 @@ import javax.swing.*;
 
 
 public class GameController extends JPanel implements ItemListener, ActionListener{
-	private static final String gameLogo= "A12_Numpuzz/src/numpuz-a12-images/gamelogo.png";
-	private static final String newGameLogo= "A12_Numpuzz/src/numpuz-a12-images/iconnew.png";
-	private static final String solutionGameLogo= "A12_Numpuzz/src/numpuz-a12-images/iconsol.png";
-	private static final String exitGameLogo= "A12_Numpuzz/src/numpuz-a12-images/iconext.png";
-	private static final String colorsGameLogo= "A12_Numpuzz/src/numpuz-a12-images/iconcol.png";
-	private static final String aboutGameLogo= "A12_Numpuzz/src/numpuz-a12-images/iconabt.png";
-	private static final String splashGameLogo= "A12_Numpuzz/src/numpuz-a12-images/game.png";
+	private static final String gameLogo= "src/numpuz-a12-images/gamelogo.png";
+	private static final String newGameLogo= "src/numpuz-a12-images/iconnew.png";
+	private static final String solutionGameLogo= "src/numpuz-a12-images/iconsol.png";
+	private static final String exitGameLogo= "src/numpuz-a12-images/iconext.png";
+	private static final String colorsGameLogo= "src/numpuz-a12-images/iconcol.png";
+	private static final String aboutGameLogo= "src/numpuz-a12-images/iconabt.png";
+	private static final String splashGameLogo= "src/numpuz-a12-images/game.png";
 	int WIDTH = 1;
 	int HEIGHT = 1;	
 	ImageIcon gameLogoIcon;
@@ -44,6 +44,13 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 	ImageIcon colorsLogoIcon;
 	ImageIcon aboutLogoIcon;
 	JFrame mainFrame; //frame for entire game
+
+	JTextField designTextField;
+	JFrame designMessageBox;
+	JButton designSetButton;
+	JLabel displayTextDesign1;
+	JLabel displayTextDesign2;
+
 	GridBagConstraints controlPanelGridBag;
 	JLabel radioHeader;
 	JLabel statusLabel;
@@ -174,7 +181,7 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 	//Frame for entire UI
 	JFrame preparePanelLayouts() {
 		mainFrame.setLayout(new BorderLayout());
-		mainFrame.setSize(950,750);
+		mainFrame.setSize(950,650);
 		mainFrame.setLocationRelativeTo(null);
 		//mainFrame.getPreferredSize();
 		mainFrame.setBackground(Color.GREEN); 
@@ -269,10 +276,10 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 					}*/
 					splashScreen();
 
-			}
+				}
 			});
-	}
-			
+		}
+
 		if (action.equals("Selection")){
 			System.out.println("Clicked Selection");
 
@@ -314,12 +321,116 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		}
 		if (action.equals("Design")){
 			System.out.println("Clicked Design Mode");
+			designMode();
 
 		}		
 		if (action.equals("Play")){
 			System.out.println("Clicked Play Mode");
 
 		}
+
+
+	}
+
+	void designMode() {
+		designMessageBox = new JFrame("Design!");
+		designMessageBox.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+
+		designTextField = new JTextField(16);
+		designTextField.setSize(getMaximumSize());
+
+		designSetButton = new JButton("Submit");
+		designSetButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				String message = designTextField.getText();
+				System.out.println(designTextField.getText());
+				char [] msg = message.toCharArray();
+				gameToDesign((String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()), msg);
+			}
+		});
+		displayTextDesign1 = new JLabel("Please enter your design...");
+		displayTextDesign2 = new JLabel("Design must fix game size constraints");
+
+		JPanel designPanel = new JPanel();
+		designPanel.add(designTextField);
+		designPanel.add(designSetButton);
+		designPanel.add(displayTextDesign1);
+		designPanel.add(displayTextDesign2);
+		designMessageBox.add(designPanel);
+
+		designMessageBox.setSize(300,150);
+		designMessageBox.show();
+
+
+
+	}
+
+	void gameToDesign(String dimensionChosen, char[] msg) {
+		int n = 3; //default size
+		int count;
+		JButton button;
+
+
+		if (dimensionChosen == "3") {
+			n = dimension[0];
+		}
+		else if (dimensionChosen == "4") {
+			n = dimension[1];
+		}		
+		else if (dimensionChosen == "5") {
+			n = dimension[2];
+		}		
+		else if (dimensionChosen == "6") {
+			n = dimension[3];
+		}		
+		else if (dimensionChosen == "7") {
+			n = dimension[4];
+		}		
+		else if (dimensionChosen == "8") {
+			n = dimension[5];
+		}	
+		else if (dimensionChosen == "9") {
+			n = dimension[6];
+		}	
+
+		count = n*n;
+
+
+		mainFrame.remove(gamePanel);
+		gamePanel = new JPanel(new GridLayout(n,n));
+		mainFrame.add(gamePanel);
+
+		String[][] gameButtons = new String[n][n];
+
+		int k = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				if (k < msg.length) {
+					gameButtons[i][j] = msg[k] + "";
+					k++;
+				}
+				else {
+					gameButtons[i][j] = "";
+				}
+				button = new JButton(gameButtons[i][j]);	
+				System.out.println(gameButtons[i][j]);
+
+				button.setSize(1/n, 1/n);
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						System.out.println("Clicked Designed-Game button");
+					}
+				});
+
+				gamePanel.add(button);
+				gamePanel.revalidate();
+				gamePanel.repaint();
+				//gamePanel.setVisible(false);
+			}		
+
+
+		}
+
 
 	}
 
@@ -478,35 +589,203 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		mainFrame.remove(gamePanel);
 		gamePanel = new JPanel(new GridLayout(n,n));
 		mainFrame.add(gamePanel);
-
-		String[][] gameButtons = new String[n][n];
-
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				if (i == n-1 && j == n-1) {
-					gameButtons[i][j] = "";
-					button = new JButton(gameButtons[i][j]);	
-					button.setBackground(Color.BLACK);
-					System.out.println(gameButtons[i][j]);
-				}
-				else {				
-					gameButtons[i][j] = randomNum.nextInt(count) +1 + "";
-					button = new JButton(gameButtons[i][j]);	
-					System.out.println(gameButtons[i][j]);
-				}
-
-				button.setSize(1/n, 1/n);
-				button.addActionListener(new ActionListener() {
+		JButton[] buttonArray = new JButton[count];
+		for (int i = 0; i < count; i++) {
+			
+			if (i == count-1){
+				button = new JButton();
+				buttonArray[i] = button;
+				//buttonArray[i].setText(Integer.toString(randomNum.nextInt(10)));
+				buttonArray[i].addActionListener(this);
+				gamePanel.add(buttonArray[i]);
+				button.setBackground(Color.BLACK);
+			}
+			else{
+				button = new JButton();
+				buttonArray[i] = button;
+				buttonArray[i].setText(Integer.toString(randomNum.nextInt(10)));
+				buttonArray[i].addActionListener(this);
+				gamePanel.add(buttonArray[i]);
+			}
+			button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent ae) {
 						System.out.println("Clicked game button");
-					}
-				});
-						gamePanel.add(button);
-		gamePanel.setVisible(false);
-		}		
+						//System.out.println(((JButton)ae.getSource()).getText());
+						if(((JButton)ae.getSource()).getText() == buttonArray[0].getText()){
+							System.out.println("Clicked button 1");
+							if(buttonArray[3].getBackground() == Color.BLACK){
+								buttonArray[0].setBackground(Color.BLACK);
+								buttonArray[3].setBackground(Color.WHITE);
+								buttonArray[3].setText(buttonArray[0].getText());
+								buttonArray[0].setText("");
 
+							}
+							else if(buttonArray[1].getBackground() == Color.BLACK){
+								buttonArray[0].setBackground(Color.BLACK);
+								buttonArray[1].setBackground(Color.WHITE);
+								buttonArray[1].setText(buttonArray[0].getText());
+								buttonArray[0].setText("");
+							}
+						else if(((JButton)ae.getSource()).getText() == buttonArray[1].getText()){
+							System.out.println("Clicked button 2");
+							if(buttonArray[0].getBackground() == Color.BLACK){
+								buttonArray[1].setBackground(Color.BLACK);
+								buttonArray[0].setBackground(Color.WHITE);
+								buttonArray[0].setText(buttonArray[1].getText());
+								buttonArray[1].setText("");
+							}
+							else if(buttonArray[2].getBackground() == Color.BLACK){
+								buttonArray[1].setBackground(Color.BLACK);
+								buttonArray[2].setBackground(Color.WHITE);
+								buttonArray[2].setText(buttonArray[1].getText());
+								buttonArray[1].setText("");
+							}
+							else if(buttonArray[4].getBackground() == Color.BLACK){
+								buttonArray[1].setBackground(Color.BLACK);
+								buttonArray[4].setBackground(Color.WHITE);
+								buttonArray[4].setText(buttonArray[1].getText());
+								buttonArray[1].setText("");
+							}
+						}
+						else if(((JButton)ae.getSource()).getText() == buttonArray[2].getText()){
+							System.out.println("Clicked button 3");
+							if(buttonArray[1].getBackground() == Color.BLACK){
+								buttonArray[2].setBackground(Color.BLACK);
+								buttonArray[1].setBackground(Color.WHITE);
+								buttonArray[1].setText(buttonArray[2].getText());
+								buttonArray[2].setText("");
+							}
+							else if(buttonArray[5].getBackground() == Color.BLACK){
+								buttonArray[2].setBackground(Color.BLACK);
+								buttonArray[5].setBackground(Color.WHITE);
+								buttonArray[5].setText(buttonArray[2].getText());
+								buttonArray[2].setText("");
+							}	
+							
+						}
+						else if(((JButton)ae.getSource()).getText() == buttonArray[3].getText()){
+							System.out.println("Clicked button 4");
+							if(buttonArray[0].getBackground() == Color.BLACK){
+								buttonArray[3].setBackground(Color.BLACK);
+								buttonArray[0].setBackground(Color.WHITE);
+								buttonArray[0].setText(buttonArray[3].getText());
+								buttonArray[3].setText("");
+							}
+							else if(buttonArray[4].getBackground() == Color.BLACK){
+								buttonArray[3].setBackground(Color.BLACK);
+								buttonArray[4].setBackground(Color.WHITE);
+								buttonArray[4].setText(buttonArray[3].getText());
+								buttonArray[3].setText("");
+							}
+							else if(buttonArray[6].getBackground() == Color.BLACK){
+								buttonArray[3].setBackground(Color.BLACK);
+								buttonArray[6].setBackground(Color.WHITE);
+								buttonArray[6].setText(buttonArray[3].getText());
+								buttonArray[3].setText("");
+							}
+						}
+						else if(((JButton)ae.getSource()).getText() == buttonArray[4].getText()){
+							System.out.println("Clicked button 5");
+							if(buttonArray[1].getBackground() == Color.BLACK){
+								buttonArray[4].setBackground(Color.BLACK);
+								buttonArray[1].setBackground(Color.WHITE);
+								buttonArray[1].setText(buttonArray[4].getText());
+								buttonArray[4].setText("");
+							}
+							else if(buttonArray[3].getBackground() == Color.BLACK){
+								buttonArray[4].setBackground(Color.BLACK);
+								buttonArray[3].setBackground(Color.WHITE);
+								buttonArray[3].setText(buttonArray[4].getText());
+								buttonArray[4].setText("");
+							}
+							else if(buttonArray[5].getBackground() == Color.BLACK){
+								buttonArray[4].setBackground(Color.BLACK);
+								buttonArray[5].setBackground(Color.WHITE);
+								buttonArray[5].setText(buttonArray[4].getText());
+								buttonArray[4].setText("");
+							}
+							else if(buttonArray[7].getBackground() == Color.BLACK){
+								buttonArray[4].setBackground(Color.BLACK);
+								buttonArray[7].setBackground(Color.WHITE);
+								buttonArray[7].setText(buttonArray[4].getText());
+								buttonArray[4].setText("");
+							}
+						}
+						else if(((JButton)ae.getSource()).getText() == buttonArray[5].getText()){
+							System.out.println("Clicked button 6");
+							if(buttonArray[2].getBackground() == Color.BLACK){
+								buttonArray[5].setBackground(Color.BLACK);
+								buttonArray[2].setBackground(Color.WHITE);
+								buttonArray[2].setText(buttonArray[5].getText());
+								buttonArray[5].setText("");
+							}
+							else if(buttonArray[4].getBackground() == Color.BLACK){
+								buttonArray[5].setBackground(Color.BLACK);
+								buttonArray[4].setBackground(Color.WHITE);
+								buttonArray[4].setText(buttonArray[5].getText());
+								buttonArray[5].setText("");
+							}
+							else if(buttonArray[8].getBackground() == Color.BLACK){
+								buttonArray[5].setBackground(Color.BLACK);
+								buttonArray[8].setBackground(Color.WHITE);
+								buttonArray[8].setText(buttonArray[5].getText());
+								buttonArray[5].setText("");
+							}
+						}
+						else if(((JButton)ae.getSource()).getText() == buttonArray[6].getText()){
+							System.out.println("Clicked button 7");
+							if(buttonArray[3].getBackground() == Color.BLACK){
+								buttonArray[6].setBackground(Color.BLACK);
+								buttonArray[3].setBackground(Color.WHITE);
+								buttonArray[3].setText(buttonArray[6].getText());
+								buttonArray[6].setText("");
+							}
+							else if(buttonArray[7].getBackground() == Color.BLACK){
+								buttonArray[6].setBackground(Color.BLACK);
+								buttonArray[7].setBackground(Color.WHITE);
+								buttonArray[7].setText(buttonArray[6].getText());
+								buttonArray[6].setText("");
+							}
+						}
+						else if(((JButton)ae.getSource()).getText() == buttonArray[7].getText()){
+							System.out.println("Clicked button 8");
+							if(buttonArray[4].getBackground() == Color.BLACK){
+								buttonArray[7].setBackground(Color.BLACK);
+								buttonArray[4].setBackground(Color.WHITE);
+								buttonArray[4].setText(buttonArray[7].getText());
+								buttonArray[7].setText("");
+							}
+							else if(buttonArray[6].getBackground() == Color.BLACK){
+								buttonArray[7].setBackground(Color.BLACK);
+								buttonArray[6].setBackground(Color.WHITE);
+								buttonArray[6].setText(buttonArray[7].getText());
+								buttonArray[7].setText("");
 
+							}}
+						else if(((JButton)ae.getSource()).getText() == buttonArray[8].getText()){
+							System.out.println("Clicked button 9");
+							if(buttonArray[5].getBackground() == Color.BLACK){
+								buttonArray[8].setBackground(Color.BLACK);
+								buttonArray[5].setBackground(Color.WHITE);
+								buttonArray[5].setText(buttonArray[8].getText());
+								buttonArray[8].setText("");
+							}
+							else if(buttonArray[7].getBackground() == Color.BLACK){
+								buttonArray[8].setBackground(Color.BLACK);
+								buttonArray[7].setBackground(Color.WHITE);
+								buttonArray[7].setText(buttonArray[8].getText());
+								buttonArray[8].setText("");
+							}
+						}
+						
+					}		
+		}});
 		}
+		
+		mainFrame.setVisible(true);}
+
+
+	//	}
 
 		
 		
@@ -524,7 +803,7 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 		//				buttonCounter++;
 		//			}
 		//		}
-	}
+	//}
 
 	public void itemStateChanged(ItemEvent e) {
 		// TODO Auto-generated method stub
