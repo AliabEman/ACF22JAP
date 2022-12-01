@@ -1,6 +1,6 @@
 /*
  *  ---------------------------------------------------------------------
- JAP COURSE - SCRIPT
+  JAP COURSE - SCRIPT
  ASSIGNMENTS - CST8221 - Fall 2022
  ---------------------------------------------------------------------
  Begin of Script (Assignments - F22)
@@ -557,7 +557,6 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 	void gameButtons(String dimensionChosen) {
 		int n = 3; //default size
 		int count;
-		JButton button;
 		Random randomNum = new Random();	
 
 
@@ -583,226 +582,292 @@ public class GameController extends JPanel implements ItemListener, ActionListen
 			n = dimension[6];
 		}	
 
+		final JButton[][] button = new JButton[n][n];
 		count = n*n;
 
 
 		mainFrame.remove(gamePanel);
 		gamePanel = new JPanel(new GridLayout(n,n));
 		mainFrame.add(gamePanel);
-		JButton[] buttonArray = new JButton[count];
-		for (int i = 0; i < count; i++) {
-			
-			if (i == count-1){
-				button = new JButton();
-				buttonArray[i] = button;
-				//buttonArray[i].setText(Integer.toString(randomNum.nextInt(10)));
-				buttonArray[i].addActionListener(this);
-				gamePanel.add(buttonArray[i]);
-				button.setBackground(Color.BLACK);
-			}
-			else{
-				button = new JButton();
-				buttonArray[i] = button;
-				buttonArray[i].setText(Integer.toString(randomNum.nextInt(10)));
-				buttonArray[i].addActionListener(this);
-				gamePanel.add(buttonArray[i]);
-			}
-			button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent ae) {
-						System.out.println("Clicked game button");
-						//System.out.println(((JButton)ae.getSource()).getText());
-						if(((JButton)ae.getSource()).getText() == buttonArray[0].getText()){
-							System.out.println("Clicked button 1");
-							if(buttonArray[3].getBackground() == Color.BLACK){
-								buttonArray[0].setBackground(Color.BLACK);
-								buttonArray[3].setBackground(Color.WHITE);
-								buttonArray[3].setText(buttonArray[0].getText());
-								buttonArray[0].setText("");
 
-							}
-							else if(buttonArray[1].getBackground() == Color.BLACK){
-								buttonArray[0].setBackground(Color.BLACK);
-								buttonArray[1].setBackground(Color.WHITE);
-								buttonArray[1].setText(buttonArray[0].getText());
-								buttonArray[0].setText("");
-							}
-						else if(((JButton)ae.getSource()).getText() == buttonArray[1].getText()){
-							System.out.println("Clicked button 2");
-							if(buttonArray[0].getBackground() == Color.BLACK){
-								buttonArray[1].setBackground(Color.BLACK);
-								buttonArray[0].setBackground(Color.WHITE);
-								buttonArray[0].setText(buttonArray[1].getText());
-								buttonArray[1].setText("");
-							}
-							else if(buttonArray[2].getBackground() == Color.BLACK){
-								buttonArray[1].setBackground(Color.BLACK);
-								buttonArray[2].setBackground(Color.WHITE);
-								buttonArray[2].setText(buttonArray[1].getText());
-								buttonArray[1].setText("");
-							}
-							else if(buttonArray[4].getBackground() == Color.BLACK){
-								buttonArray[1].setBackground(Color.BLACK);
-								buttonArray[4].setBackground(Color.WHITE);
-								buttonArray[4].setText(buttonArray[1].getText());
-								buttonArray[1].setText("");
-							}
-						}
-						else if(((JButton)ae.getSource()).getText() == buttonArray[2].getText()){
-							System.out.println("Clicked button 3");
-							if(buttonArray[1].getBackground() == Color.BLACK){
-								buttonArray[2].setBackground(Color.BLACK);
-								buttonArray[1].setBackground(Color.WHITE);
-								buttonArray[1].setText(buttonArray[2].getText());
-								buttonArray[2].setText("");
-							}
-							else if(buttonArray[5].getBackground() == Color.BLACK){
-								buttonArray[2].setBackground(Color.BLACK);
-								buttonArray[5].setBackground(Color.WHITE);
-								buttonArray[5].setText(buttonArray[2].getText());
-								buttonArray[2].setText("");
-							}	
-							
-						}
-						else if(((JButton)ae.getSource()).getText() == buttonArray[3].getText()){
-							System.out.println("Clicked button 4");
-							if(buttonArray[0].getBackground() == Color.BLACK){
-								buttonArray[3].setBackground(Color.BLACK);
-								buttonArray[0].setBackground(Color.WHITE);
-								buttonArray[0].setText(buttonArray[3].getText());
-								buttonArray[3].setText("");
-							}
-							else if(buttonArray[4].getBackground() == Color.BLACK){
-								buttonArray[3].setBackground(Color.BLACK);
-								buttonArray[4].setBackground(Color.WHITE);
-								buttonArray[4].setText(buttonArray[3].getText());
-								buttonArray[3].setText("");
-							}
-							else if(buttonArray[6].getBackground() == Color.BLACK){
-								buttonArray[3].setBackground(Color.BLACK);
-								buttonArray[6].setBackground(Color.WHITE);
-								buttonArray[6].setText(buttonArray[3].getText());
-								buttonArray[3].setText("");
-							}
-						}
-						else if(((JButton)ae.getSource()).getText() == buttonArray[4].getText()){
-							System.out.println("Clicked button 5");
-							if(buttonArray[1].getBackground() == Color.BLACK){
-								buttonArray[4].setBackground(Color.BLACK);
-								buttonArray[1].setBackground(Color.WHITE);
-								buttonArray[1].setText(buttonArray[4].getText());
-								buttonArray[4].setText("");
-							}
-							else if(buttonArray[3].getBackground() == Color.BLACK){
-								buttonArray[4].setBackground(Color.BLACK);
-								buttonArray[3].setBackground(Color.WHITE);
-								buttonArray[3].setText(buttonArray[4].getText());
-								buttonArray[4].setText("");
-							}
-							else if(buttonArray[5].getBackground() == Color.BLACK){
-								buttonArray[4].setBackground(Color.BLACK);
-								buttonArray[5].setBackground(Color.WHITE);
-								buttonArray[5].setText(buttonArray[4].getText());
-								buttonArray[4].setText("");
-							}
-							else if(buttonArray[7].getBackground() == Color.BLACK){
-								buttonArray[4].setBackground(Color.BLACK);
-								buttonArray[7].setBackground(Color.WHITE);
-								buttonArray[7].setText(buttonArray[4].getText());
-								buttonArray[4].setText("");
-							}
-						}
-						else if(((JButton)ae.getSource()).getText() == buttonArray[5].getText()){
-							System.out.println("Clicked button 6");
-							if(buttonArray[2].getBackground() == Color.BLACK){
-								buttonArray[5].setBackground(Color.BLACK);
-								buttonArray[2].setBackground(Color.WHITE);
-								buttonArray[2].setText(buttonArray[5].getText());
-								buttonArray[5].setText("");
-							}
-							else if(buttonArray[4].getBackground() == Color.BLACK){
-								buttonArray[5].setBackground(Color.BLACK);
-								buttonArray[4].setBackground(Color.WHITE);
-								buttonArray[4].setText(buttonArray[5].getText());
-								buttonArray[5].setText("");
-							}
-							else if(buttonArray[8].getBackground() == Color.BLACK){
-								buttonArray[5].setBackground(Color.BLACK);
-								buttonArray[8].setBackground(Color.WHITE);
-								buttonArray[8].setText(buttonArray[5].getText());
-								buttonArray[5].setText("");
-							}
-						}
-						else if(((JButton)ae.getSource()).getText() == buttonArray[6].getText()){
-							System.out.println("Clicked button 7");
-							if(buttonArray[3].getBackground() == Color.BLACK){
-								buttonArray[6].setBackground(Color.BLACK);
-								buttonArray[3].setBackground(Color.WHITE);
-								buttonArray[3].setText(buttonArray[6].getText());
-								buttonArray[6].setText("");
-							}
-							else if(buttonArray[7].getBackground() == Color.BLACK){
-								buttonArray[6].setBackground(Color.BLACK);
-								buttonArray[7].setBackground(Color.WHITE);
-								buttonArray[7].setText(buttonArray[6].getText());
-								buttonArray[6].setText("");
-							}
-						}
-						else if(((JButton)ae.getSource()).getText() == buttonArray[7].getText()){
-							System.out.println("Clicked button 8");
-							if(buttonArray[4].getBackground() == Color.BLACK){
-								buttonArray[7].setBackground(Color.BLACK);
-								buttonArray[4].setBackground(Color.WHITE);
-								buttonArray[4].setText(buttonArray[7].getText());
-								buttonArray[7].setText("");
-							}
-							else if(buttonArray[6].getBackground() == Color.BLACK){
-								buttonArray[7].setBackground(Color.BLACK);
-								buttonArray[6].setBackground(Color.WHITE);
-								buttonArray[6].setText(buttonArray[7].getText());
-								buttonArray[7].setText("");
+		String[][] gameButtons = new String[n][n];
 
-							}}
-						else if(((JButton)ae.getSource()).getText() == buttonArray[8].getText()){
-							System.out.println("Clicked button 9");
-							if(buttonArray[5].getBackground() == Color.BLACK){
-								buttonArray[8].setBackground(Color.BLACK);
-								buttonArray[5].setBackground(Color.WHITE);
-								buttonArray[5].setText(buttonArray[8].getText());
-								buttonArray[8].setText("");
-							}
-							else if(buttonArray[7].getBackground() == Color.BLACK){
-								buttonArray[8].setBackground(Color.BLACK);
-								buttonArray[7].setBackground(Color.WHITE);
-								buttonArray[7].setText(buttonArray[8].getText());
-								buttonArray[8].setText("");
-							}
-						}
-						
-					}		
-		}});
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				if (i == n-1 && j == n-1) {
+					gameButtons[i][j] = "";
+					button[i][j] = new JButton(gameButtons[i][j]);	
+					button[i][j].setBackground(Color.BLACK);
+					System.out.println(gameButtons[i][j]);
+				}
+				else {				
+					gameButtons[i][j] = randomNum.nextInt(count) +1 + "";
+					button[i][j] = new JButton(gameButtons[i][j]);
+					button[i][j].setBackground(Color.WHITE);
+					button[i][j].addActionListener(new Controller());					
+					System.out.println(gameButtons[i][j]);
+				}
+
+				gamePanel.add(button[i][j]);
+
+				button[i][j].setSize(1/n, 1/n);
+  
+				gamePanel.setVisible(true);
+			}
 		}
-		
-		mainFrame.setVisible(true);}
+	}		
 
+
+	//
+	//	void gameButtons(String dimensionChosen) {
+	//		int n = 3; //default size
+	//		int count;
+	//		JButton button;
+	//		Random randomNum = new Random();	
+	//
+	//
+	//		if (dimensionChosen == "3") {
+	//			n = dimension[0];
+	//		}
+	//		else if (dimensionChosen == "4") {
+	//			n = dimension[1];
+	//		}		
+	//		else if (dimensionChosen == "5") {
+	//			n = dimension[2];
+	//		}		
+	//		else if (dimensionChosen == "6") {
+	//			n = dimension[3];
+	//		}		
+	//		else if (dimensionChosen == "7") {
+	//			n = dimension[4];
+	//		}		
+	//		else if (dimensionChosen == "8") {
+	//			n = dimension[5];
+	//		}	
+	//		else if (dimensionChosen == "9") {
+	//			n = dimension[6];
+	//		}	
+	//
+	//		count = n*n;
+	//
+	//
+	//		mainFrame.remove(gamePanel);
+	//		gamePanel = new JPanel(new GridLayout(n,n));
+	//		mainFrame.add(gamePanel);
+	//		final JButton[] buttonArray = new JButton[count];
+	//		for (int i = 0; i < count; i++) {
+	//
+	//			if (i == count-1){
+	//				button = new JButton();
+	//				buttonArray[i] = button;
+	//				//buttonArray[i].setText(Integer.toString(randomNum.nextInt(10)));
+	//				buttonArray[i].addActionListener(this);
+	//				gamePanel.add(buttonArray[i]);
+	//				button.setBackground(Color.BLACK);
+	//			}
+	//			else{
+	//				button = new JButton();
+	//				buttonArray[i] = button;
+	//				buttonArray[i].setText(Integer.toString(randomNum.nextInt(10)));
+	//				buttonArray[i].addActionListener(this);
+	//				gamePanel.add(buttonArray[i]);
+	//			}
+	//			button.addActionListener(new ActionListener() {
+	//				public void actionPerformed(ActionEvent ae) {
+	//					System.out.println("Clicked game button");
+	//					//System.out.println(((JButton)ae.getSource()).getText());
+	//					if(((JButton)ae.getSource()).getText() == buttonArray[0].getText()){
+	//						System.out.println("Clicked button 1");
+	//						if(buttonArray[3].getBackground() == Color.BLACK){
+	//							buttonArray[0].setBackground(Color.BLACK);
+	//							buttonArray[3].setBackground(Color.WHITE);
+	//							buttonArray[3].setText(buttonArray[0].getText());
+	//							buttonArray[0].setText("");
+	//
+	//						}
+	//						else if(buttonArray[1].getBackground() == Color.BLACK){
+	//							buttonArray[0].setBackground(Color.BLACK);
+	//							buttonArray[1].setBackground(Color.WHITE);
+	//							buttonArray[1].setText(buttonArray[0].getText());
+	//							buttonArray[0].setText("");
+	//						}
+	//						else if(((JButton)ae.getSource()).getText() == buttonArray[1].getText()){
+	//							System.out.println("Clicked button 2");
+	//							if(buttonArray[0].getBackground() == Color.BLACK){
+	//								buttonArray[1].setBackground(Color.BLACK);
+	//								buttonArray[0].setBackground(Color.WHITE);
+	//								buttonArray[0].setText(buttonArray[1].getText());
+	//								buttonArray[1].setText("");
+	//							}
+	//							else if(buttonArray[2].getBackground() == Color.BLACK){
+	//								buttonArray[1].setBackground(Color.BLACK);
+	//								buttonArray[2].setBackground(Color.WHITE);
+	//								buttonArray[2].setText(buttonArray[1].getText());
+	//								buttonArray[1].setText("");
+	//							}
+	//							else if(buttonArray[4].getBackground() == Color.BLACK){
+	//								buttonArray[1].setBackground(Color.BLACK);
+	//								buttonArray[4].setBackground(Color.WHITE);
+	//								buttonArray[4].setText(buttonArray[1].getText());
+	//								buttonArray[1].setText("");
+	//							}
+	//						}
+	//						else if(((JButton)ae.getSource()).getText() == buttonArray[2].getText()){
+	//							System.out.println("Clicked button 3");
+	//							if(buttonArray[1].getBackground() == Color.BLACK){
+	//								buttonArray[2].setBackground(Color.BLACK);
+	//								buttonArray[1].setBackground(Color.WHITE);
+	//								buttonArray[1].setText(buttonArray[2].getText());
+	//								buttonArray[2].setText("");
+	//							}
+	//							else if(buttonArray[5].getBackground() == Color.BLACK){
+	//								buttonArray[2].setBackground(Color.BLACK);
+	//								buttonArray[5].setBackground(Color.WHITE);
+	//								buttonArray[5].setText(buttonArray[2].getText());
+	//								buttonArray[2].setText("");
+	//							}	
+	//
+	//						}
+	//						else if(((JButton)ae.getSource()).getText() == buttonArray[3].getText()){
+	//							System.out.println("Clicked button 4");
+	//							if(buttonArray[0].getBackground() == Color.BLACK){
+	//								buttonArray[3].setBackground(Color.BLACK);
+	//								buttonArray[0].setBackground(Color.WHITE);
+	//								buttonArray[0].setText(buttonArray[3].getText());
+	//								buttonArray[3].setText("");
+	//							}
+	//							else if(buttonArray[4].getBackground() == Color.BLACK){
+	//								buttonArray[3].setBackground(Color.BLACK);
+	//								buttonArray[4].setBackground(Color.WHITE);
+	//								buttonArray[4].setText(buttonArray[3].getText());
+	//								buttonArray[3].setText("");
+	//							}
+	//							else if(buttonArray[6].getBackground() == Color.BLACK){
+	//								buttonArray[3].setBackground(Color.BLACK);
+	//								buttonArray[6].setBackground(Color.WHITE);
+	//								buttonArray[6].setText(buttonArray[3].getText());
+	//								buttonArray[3].setText("");
+	//							}
+	//						}
+	//						else if(((JButton)ae.getSource()).getText() == buttonArray[4].getText()){
+	//							System.out.println("Clicked button 5");
+	//							if(buttonArray[1].getBackground() == Color.BLACK){
+	//								buttonArray[4].setBackground(Color.BLACK);
+	//								buttonArray[1].setBackground(Color.WHITE);
+	//								buttonArray[1].setText(buttonArray[4].getText());
+	//								buttonArray[4].setText("");
+	//							}
+	//							else if(buttonArray[3].getBackground() == Color.BLACK){
+	//								buttonArray[4].setBackground(Color.BLACK);
+	//								buttonArray[3].setBackground(Color.WHITE);
+	//								buttonArray[3].setText(buttonArray[4].getText());
+	//								buttonArray[4].setText("");
+	//							}
+	//							else if(buttonArray[5].getBackground() == Color.BLACK){
+	//								buttonArray[4].setBackground(Color.BLACK);
+	//								buttonArray[5].setBackground(Color.WHITE);
+	//								buttonArray[5].setText(buttonArray[4].getText());
+	//								buttonArray[4].setText("");
+	//							}
+	//							else if(buttonArray[7].getBackground() == Color.BLACK){
+	//								buttonArray[4].setBackground(Color.BLACK);
+	//								buttonArray[7].setBackground(Color.WHITE);
+	//								buttonArray[7].setText(buttonArray[4].getText());
+	//								buttonArray[4].setText("");
+	//							}
+	//						}
+	//						else if(((JButton)ae.getSource()).getText() == buttonArray[5].getText()){
+	//							System.out.println("Clicked button 6");
+	//							if(buttonArray[2].getBackground() == Color.BLACK){
+	//								buttonArray[5].setBackground(Color.BLACK);
+	//								buttonArray[2].setBackground(Color.WHITE);
+	//								buttonArray[2].setText(buttonArray[5].getText());
+	//								buttonArray[5].setText("");
+	//							}
+	//							else if(buttonArray[4].getBackground() == Color.BLACK){
+	//								buttonArray[5].setBackground(Color.BLACK);
+	//								buttonArray[4].setBackground(Color.WHITE);
+	//								buttonArray[4].setText(buttonArray[5].getText());
+	//								buttonArray[5].setText("");
+	//							}
+	//							else if(buttonArray[8].getBackground() == Color.BLACK){
+	//								buttonArray[5].setBackground(Color.BLACK);
+	//								buttonArray[8].setBackground(Color.WHITE);
+	//								buttonArray[8].setText(buttonArray[5].getText());
+	//								buttonArray[5].setText("");
+	//							}
+	//						}
+	//						else if(((JButton)ae.getSource()).getText() == buttonArray[6].getText()){
+	//							System.out.println("Clicked button 7");
+	//							if(buttonArray[3].getBackground() == Color.BLACK){
+	//								buttonArray[6].setBackground(Color.BLACK);
+	//								buttonArray[3].setBackground(Color.WHITE);
+	//								buttonArray[3].setText(buttonArray[6].getText());
+	//								buttonArray[6].setText("");
+	//							}
+	//							else if(buttonArray[7].getBackground() == Color.BLACK){
+	//								buttonArray[6].setBackground(Color.BLACK);
+	//								buttonArray[7].setBackground(Color.WHITE);
+	//								buttonArray[7].setText(buttonArray[6].getText());
+	//								buttonArray[6].setText("");
+	//							}
+	//						}
+	//						else if(((JButton)ae.getSource()).getText() == buttonArray[7].getText()){
+	//							System.out.println("Clicked button 8");
+	//							if(buttonArray[4].getBackground() == Color.BLACK){
+	//								buttonArray[7].setBackground(Color.BLACK);
+	//								buttonArray[4].setBackground(Color.WHITE);
+	//								buttonArray[4].setText(buttonArray[7].getText());
+	//								buttonArray[7].setText("");
+	//							}
+	//							else if(buttonArray[6].getBackground() == Color.BLACK){
+	//								buttonArray[7].setBackground(Color.BLACK);
+	//								buttonArray[6].setBackground(Color.WHITE);
+	//								buttonArray[6].setText(buttonArray[7].getText());
+	//								buttonArray[7].setText("");
+	//
+	//							}}
+	//						else if(((JButton)ae.getSource()).getText() == buttonArray[8].getText()){
+	//							System.out.println("Clicked button 9");
+	//							if(buttonArray[5].getBackground() == Color.BLACK){
+	//								buttonArray[8].setBackground(Color.BLACK);
+	//								buttonArray[5].setBackground(Color.WHITE);
+	//								buttonArray[5].setText(buttonArray[8].getText());
+	//								buttonArray[8].setText("");
+	//							}
+	//							else if(buttonArray[7].getBackground() == Color.BLACK){
+	//								buttonArray[8].setBackground(Color.BLACK);
+	//								buttonArray[7].setBackground(Color.WHITE);
+	//								buttonArray[7].setText(buttonArray[8].getText());
+	//								buttonArray[8].setText("");
+	//							}
+	//						}
+	//						
+	//					}		
+	//		}});
+	//		}
+	//		
+	//		mainFrame.setVisible(true);}
+	//
 
 	//	}
 
-		
-		
 
 
 
 
-		//		for (int i = 0; i < n; i++) {
-		//			for (int j = 0; j < n; j++) {
-		//
-		//
-		//				if (buttonCounter == count) {
-		//					break;
-		//				}
-		//				buttonCounter++;
-		//			}
-		//		}
+
+
+	//		for (int i = 0; i < n; i++) {
+	//			for (int j = 0; j < n; j++) {
+	//
+	//
+	//				if (buttonCounter == count) {
+	//					break;
+	//				}
+	//				buttonCounter++;
+	//			}
+	//		}
 	//}
 
 	public void itemStateChanged(ItemEvent e) {
