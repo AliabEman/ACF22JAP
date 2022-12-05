@@ -37,7 +37,14 @@ public class GameController extends JPanel implements ItemListener {
 	ImageIcon exitLogoIcon;
 	ImageIcon colorsLogoIcon;
 	ImageIcon aboutLogoIcon;
-	JFrame mainFrame; //frame for entire game
+	static JFrame mainFrame; //frame for entire game
+
+	JTextField designTextField;
+	JFrame designMessageBox;
+	JButton designSetButton;
+	JLabel displayTextDesign1;
+	JLabel displayTextDesign2;
+
 	GridBagConstraints controlPanelGridBag;
 	JLabel radioHeader;
 	JLabel statusLabel;
@@ -46,7 +53,7 @@ public class GameController extends JPanel implements ItemListener {
 	JLabel dimLabel;
 	JLabel typeLabel;
 	JPanel controlPanel; //game control settings
-	JPanel gamePanel; //game puzzle
+	static JPanel gamePanel; //game puzzle
 	JMenuBar menuBar; //menu bar
 	JMenu gameMenu, helpMenu;
 	JMenuItem helpMenuItem1, helpMenuItem2;
@@ -64,20 +71,48 @@ public class GameController extends JPanel implements ItemListener {
 	JButton finish;
 	JRadioButton designRadioButton, playRadioButton;
 	JComboBox dimensionChoices;
-	int dimension[]= {3,4,5,6,7,8,9}; //affects size of puzzle pieces
+	String dimensionsComboBox[] = {"3","4","5","6","7","8","9"}; 
+
+	static int dimension[]= {3,4,5,6,7,8,9}; //affects size of puzzle pieces
 	String gameType[] = {"Number", "Text"};
 
 
-	public GameController() {
 
+
+	public GameController() {
+		splashScreen();
+		instantiateGamePieces();
+		//game.gameButtons();
+		preparePanelLayouts();
+		gameControlPanel();
+		gameRadioButton();
 	}
 
+	public Runnable splashScreen() {
+		JFrame window = new JFrame("Algonquin College - NumPuz");
+		window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		window.setName("Algonquin College - NumPuz");
+		window.getContentPane().add(new JLabel("NumPuz", new ImageIcon(splashGameLogo), SwingConstants.CENTER));
+		window.setBounds(0, 0, 500, 500);
+		window.setVisible(true);
+		window.setLocationRelativeTo(null);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		window.setVisible(true);
+		window.dispose();
+		return null;
+	}
 
 	boolean instantiateGamePieces() {
 		mainFrame = new JFrame();
-		controlPanel = new JPanel(new BorderLayout());
-		gamePanel = new JPanel(new GridLayout(dimension[3], dimension[3])); //need to replace with dynamic array for sizing
+		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+
+		controlPanel = new JPanel(new BorderLayout());
+		gamePanel = new JPanel(new GridLayout(3, 3)); //need to replace with dynamic array for sizing
 
 		controlPanelGridBag = new GridBagConstraints();
 
@@ -102,38 +137,57 @@ public class GameController extends JPanel implements ItemListener {
 
 		menuBar = new JMenuBar();
 
-		gameMenu = new JMenu("Game");		
+		gameMenu = new JMenu("Game");	
+
 		gameMenuItem1 = new JMenuItem("New", newLogoIcon);
+		gameMenuItem1.addActionListener(this);
 		gameMenuItem2 = new JMenuItem("Solution", solutionLogoIcon);
+		gameMenuItem2.addActionListener(this);
 		gameMenuItem3 = new JMenuItem("Exit", exitLogoIcon);
+		gameMenuItem3.addActionListener(this);
 
 		helpMenu = new JMenu("Help");
 		helpMenuItem1 = new JMenuItem("Colors", colorsLogoIcon);
+		helpMenuItem1.addActionListener(this);
 		helpMenuItem2 = new JMenuItem("About", aboutLogoIcon);
+		helpMenuItem2.addActionListener(this);
 
-		numPuzButton = new JButton(gameLogoIcon);
+		numPuzButton = new JButton("NumPuz!", gameLogoIcon);
+		numPuzButton.addActionListener(this);
 		gameChoice = new JButton("Selection");
-		show = new JButton("Show");
-		hide = new JButton("Hide");
-		save = new JButton("Save");
-		load = new JButton("Load");
-		random = new JButton("Rand");
-		finish = new JButton("Finish");
+		gameChoice.addActionListener(this);
 
+		show = new JButton("Show");
+		show.addActionListener(this);
+		hide = new JButton("Hide");
+		hide.addActionListener(this);
+		save = new JButton("Save");
+		save.addActionListener(this);
+		load = new JButton("Load");
+		load.addActionListener(this);
+		random = new JButton("Rand");
+		random.addActionListener(this);
+		finish = new JButton("Finish");
+		finish.addActionListener(this);
 		return true;
 	}
 
 	//Frame for entire UI
 	JFrame preparePanelLayouts() {
 		mainFrame.setLayout(new BorderLayout());
-		mainFrame.setSize(650,600);
-		mainFrame.getPreferredSize();
+		mainFrame.setSize(950,650);
+		mainFrame.setLocationRelativeTo(null);
+		//mainFrame.getPreferredSize();
 		mainFrame.setBackground(Color.GREEN); 
 		mainFrame.setResizable(false);
 
-		controlPanel.setSize(100,400);
-		controlPanel.setBackground(Color.YELLOW);	
 		controlPanel.setLayout(new GridBagLayout());
+		controlPanel.setSize(200,600);
+		controlPanel.setBackground(Color.YELLOW);	
+
+		gamePanel.setLayout(new BorderLayout());
+		gamePanel.setSize(600, 600);
+		gamePanel.setBackground(Color.MAGENTA);
 
 		mainFrame.add(controlPanel, BorderLayout.EAST);
 		mainFrame.add(gamePanel, BorderLayout.WEST);
@@ -143,566 +197,245 @@ public class GameController extends JPanel implements ItemListener {
 
 		return mainFrame;
 	}
-	
-	void dimensionChoicesButton(){
-		String dimensionsComboBox[] = {"3","4","5","6","7","8","9"};
-		JButton x0y0 = new JButton("0:0");
-		JButton x0y1 = new JButton("0:1");
-		JButton x0y2 = new JButton("0:2");
-		JButton x0y3 = new JButton("0:3");
-		JButton x0y4 = new JButton("0:4");
-		JButton x0y5 = new JButton("0:5");
-		JButton x0y6 = new JButton("0:6");
-		JButton x0y7 = new JButton("0:7");
-		JButton x0y8 = new JButton("0:8");
-		JButton x1y0 = new JButton("1:0");
-		JButton x1y1 = new JButton("1:1");
-		JButton x1y2 = new JButton("1:2");
-		JButton x1y3 = new JButton("1:3");
-		JButton x1y4 = new JButton("1:4");
-		JButton x1y5 = new JButton("1:5");
-		JButton x1y6 = new JButton("1:6");
-		JButton x1y7 = new JButton("1:7");
-		JButton x1y8 = new JButton("1:8");
-		JButton x2y0 = new JButton("2:0");
-		JButton x2y1 = new JButton("2:1");
-		JButton x2y2 = new JButton("2:2");
-		JButton x2y3 = new JButton("2:3");
-		JButton x2y4 = new JButton("2:4");
-		JButton x2y5 = new JButton("2:5");
-		JButton x2y6 = new JButton("2:6");
-		JButton x2y7 = new JButton("2:7");
-		JButton x2y8 = new JButton("2:8");
-		JButton x3y0 = new JButton("3:0");
-		JButton x3y1 = new JButton("3:1");
-		JButton x3y2 = new JButton("3:2");
-		JButton x3y3 = new JButton("3:3");
-		JButton x3y4 = new JButton("3:4");
-		JButton x3y5 = new JButton("3:5");
-		JButton x3y6 = new JButton("3:6");
-		JButton x3y7 = new JButton("3:7");
-		JButton x3y8 = new JButton("3:8");
-		JButton x4y0 = new JButton("4:0");
-		JButton x4y1 = new JButton("4:1");
-		JButton x4y2 = new JButton("4:2");
-		JButton x4y3 = new JButton("4:3");
-		JButton x4y4 = new JButton("4:4");
-		JButton x4y5 = new JButton("4:5");
-		JButton x4y6 = new JButton("4:6");
-		JButton x4y7 = new JButton("4:7");
-		JButton x4y8 = new JButton("4:8");
-		JButton x5y0 = new JButton("5:0");
-		JButton x5y1 = new JButton("5:1");
-		JButton x5y2 = new JButton("5:2");
-		JButton x5y3 = new JButton("5:3");
-		JButton x5y4 = new JButton("5:4");
-		JButton x5y5 = new JButton("5:5");
-		JButton x5y6 = new JButton("5:6");
-		JButton x5y7 = new JButton("5:7");
-		JButton x5y8 = new JButton("5:8");
-		JButton x6y0 = new JButton("6:0");
-		JButton x6y1 = new JButton("6:1");
-		JButton x6y2 = new JButton("6:2");
-		JButton x6y3 = new JButton("6:3");
-		JButton x6y4 = new JButton("6:4");
-		JButton x6y5 = new JButton("6:5");
-		JButton x6y6 = new JButton("6:6");
-		JButton x6y7 = new JButton("6:7");
-		JButton x6y8 = new JButton("6:8");
-		JButton x7y0 = new JButton("7:0");
-		JButton x7y1 = new JButton("7:1");
-		JButton x7y2 = new JButton("7:2");
-		JButton x7y3 = new JButton("7:3");
-		JButton x7y4 = new JButton("7:4");
-		JButton x7y5 = new JButton("7:5");
-		JButton x7y6 = new JButton("7:6");
-		JButton x7y7 = new JButton("7:7");
-		JButton x7y8 = new JButton("7:8");
-		JButton x8y0 = new JButton("8:0");
-		JButton x8y1 = new JButton("8:1");
-		JButton x8y2 = new JButton("8:2");
-		JButton x8y3 = new JButton("8:3");
-		JButton x8y4 = new JButton("8:4");
-		JButton x8y5 = new JButton("8:5");
-		JButton x8y6 = new JButton("8:6");
-		JButton x8y7 = new JButton("8:7");
-		JButton x8y8 = new JButton("8:8");
 
-
-
-
-
-
-		JButton[] s3 = new JButton[9];
-					s3[0] = x0y0;
-					s3[1] = x0y1;
-					s3[2] = x0y2;
-					s3[3] = x1y0;
-					s3[4] = x1y1;
-					s3[5] = x1y2;
-					s3[6] = x2y0;
-					s3[7] = x2y1;
-					s3[8] = x2y2;
-
-		JButton[] s4 = new JButton[16];
-					s4[0] = x0y0;
-					s4[1] = x0y1;
-					s4[2] = x0y2;
-					s4[3] = x0y3;
-					s4[4] = x1y0;
-					s4[5] = x1y1;
-					s4[6] = x1y2;
-					s4[7] = x1y3;
-					s4[8] = x2y0;
-					s4[9] = x2y1;
-					s4[10] = x2y2;
-					s4[11] = x2y3;
-					s4[12] = x3y0;
-					s4[13] = x3y1;
-					s4[14] = x3y2;
-					s4[15] = x3y3;
-		JButton[] s5 = new JButton[25];
-			s5[0] = x0y0;
-			s5[1] = x0y1;
-			s5[2] = x0y2;
-			s5[3] = x0y3;
-			s5[4] = x0y4;
-			s5[5] = x1y0;
-			s5[6] = x1y1;
-			s5[7] = x1y2;
-			s5[8] = x1y3;
-			s5[9] = x1y4;
-			s5[10] = x2y0;
-			s5[11] = x2y1;
-			s5[12] = x2y2;
-			s5[13] = x2y3;
-			s5[14] = x2y4;
-			s5[15] = x3y0;
-			s5[16] = x3y1;
-			s5[17] = x3y2;
-			s5[18] = x3y3;
-			s5[19] = x3y4;
-			s5[20] = x4y0;
-			s5[21] = x4y1;
-			s5[22] = x4y2;
-			s5[23] = x4y3;
-			s5[24] = x4y4;
-		JButton[] s6 = new JButton[36];
-		s6[0] = x0y0;
-		s6[1] = x0y1;
-		s6[2] = x0y2;
-		s6[3] = x0y3;
-		s6[4] = x0y4;
-		s6[5] = x0y5;
-		s6[6] = x1y0;
-		s6[7] = x1y1;
-		s6[8] = x1y2;
-		s6[9] = x1y3;
-		s6[10] = x1y4;
-		s6[11] = x1y5;
-		s6[12] = x2y0;
-		s6[13] = x2y1;
-		s6[14] = x2y2;
-		s6[15] = x2y3;
-		s6[16] = x2y4;
-		s6[17] = x2y5;
-		s6[18] = x3y0;
-		s6[19] = x3y1;
-		s6[20] = x3y2;
-		s6[21] = x3y3;
-		s6[22] = x3y4;
-		s6[23] = x3y5;
-		s6[24] = x4y0;
-		s6[25] = x4y1;
-		s6[26] = x4y2;
-		s6[27] = x4y3;
-		s6[28] = x4y4;
-		s6[29] = x4y5;
-		s6[30] = x5y0;
-		s6[31] = x5y1;
-		s6[32] = x5y2;
-		s6[33] = x5y3;
-		s6[34] = x5y4;
-		s6[35] = x5y5;
-		JButton[] s7 = new JButton[49];
-		s7[0] = x0y0;
-		s7[1] = x0y1;
-		s7[2] = x0y2;
-		s7[3] = x0y3;
-		s7[4] = x0y4;
-		s7[5] = x0y5;
-		s7[6] = x0y6;
-		s7[7] = x1y0;
-		s7[8] = x1y1;
-		s7[9] = x1y2;
-		s7[10] = x1y3;
-		s7[11] = x1y4;
-		s7[12] = x1y5;
-		s7[13] = x1y6;
-		s7[14] = x2y0;
-		s7[15] = x2y1;
-		s7[16] = x2y2;
-		s7[17] = x2y3;
-		s7[18] = x2y4;
-		s7[19] = x2y5;
-		s7[20] = x2y6;
-		s7[21] = x3y0;
-		s7[22] = x3y1;
-		s7[23] = x3y2;
-		s7[24] = x3y3;
-		s7[25] = x3y4;
-		s7[26] = x3y5;
-		s7[27] = x3y6;
-		s7[28] = x4y0;
-		s7[29] = x4y1;
-		s7[30] = x4y2;
-		s7[31] = x4y3;
-		s7[32] = x4y4;
-		s7[33] = x4y5;
-		s7[34] = x4y6;
-		s7[35] = x5y0;
-		s7[36] = x5y1;
-		s7[37] = x5y2;
-		s7[38] = x5y3;
-		s7[39] = x5y4;
-		s7[40] = x5y5;
-		s7[41] = x5y6;
-		s7[42] = x6y0;
-		s7[43] = x6y1;
-		s7[44] = x6y2;
-		s7[45] = x6y3;
-		s7[46] = x6y4;
-		s7[47] = x6y5;
-		s7[48] = x6y6;
-		JButton[] s8 = new JButton[64];
-		s8[0] = x0y0;
-		s8[1] = x0y1;
-		s8[2] = x0y2;
-		s8[3] = x0y3;
-		s8[4] = x0y4;
-		s8[5] = x0y5;
-		s8[6] = x0y6;
-		s8[7] = x0y7;
-		s8[8] = x1y0;
-		s8[9] = x1y1;
-		s8[10] = x1y2;
-		s8[11] = x1y3;
-		s8[12] = x1y4;
-		s8[13] = x1y5;
-		s8[14] = x1y6;
-		s8[15] = x1y7;
-		s8[16] = x2y0;
-		s8[17] = x2y1;
-		s8[18] = x2y2;
-		s8[19] = x2y3;
-		s8[20] = x2y4;
-		s8[21] = x2y5;
-		s8[22] = x2y6;
-		s8[23] = x2y7;
-		s8[24] = x3y0;
-		s8[25] = x3y1;
-		s8[26] = x3y2;
-		s8[27] = x3y3;
-		s8[28] = x3y4;
-		s8[29] = x3y5;
-		s8[30] = x3y6;
-		s8[31] = x3y7;
-		s8[32] = x4y0;
-		s8[33] = x4y1;
-		s8[34] = x4y2;
-		s8[35] = x4y3;
-		s8[36] = x4y4;
-		s8[37] = x4y5;
-		s8[38] = x4y6;
-		s8[39] = x4y7;
-		s8[40] = x5y0;
-		s8[41] = x5y1;
-		s8[42] = x5y2;
-		s8[43] = x5y3;
-		s8[44] = x5y4;
-		s8[45] = x5y5;
-		s8[46] = x5y6;
-		s8[47] = x5y7;
-		s8[48] = x6y0;
-		s8[49] = x6y1;
-		s8[50] = x6y2;
-		s8[51] = x6y3;
-		s8[52] = x6y4;
-		s8[53] = x6y5;
-		s8[54] = x6y6;
-		s8[55] = x6y7;
-		s8[56] = x7y0;
-		s8[57] = x7y1;
-		s8[58] = x7y2;
-		s8[59] = x7y3;
-		s8[60] = x7y4;
-		s8[61] = x7y5;
-		s8[62] = x7y6;
-		s8[63] = x7y7;
-		JButton[] s9 = new JButton[81];
-		s9[0] = x0y0;
-		s9[1] = x0y1;
-		s9[2] = x0y2;
-		s9[3] = x0y3;
-		s9[4] = x0y4;
-		s9[5] = x0y5;
-		s9[6] = x0y6;
-		s9[7] = x0y7;
-		s9[8] = x0y8;
-		s9[9] = x1y0;
-		s9[10] = x1y1;
-		s9[11] = x1y2;
-		s9[12] = x1y3;
-		s9[13] = x1y4;
-		s9[14] = x1y5;
-		s9[15] = x1y6;
-		s9[16] = x1y7;
-		s9[17] = x1y8;
-		s9[18] = x2y0;
-		s9[19] = x2y1;
-		s9[20] = x2y2;
-		s9[21] = x2y3;
-		s9[22] = x2y4;
-		s9[23] = x2y5;
-		s9[24] = x2y6;
-		s9[25] = x2y7;
-		s9[26] = x2y8;
-		s9[27] = x3y0;
-		s9[28] = x3y1;
-		s9[29] = x3y2;
-		s9[30] = x3y3;
-		s9[31] = x3y4;
-		s9[32] = x3y5;
-		s9[33] = x3y6;
-		s9[34] = x3y7;
-		s9[35] = x3y8;
-		s9[36] = x4y0;
-		s9[37] = x4y1;
-		s9[38] = x4y2;
-		s9[39] = x4y3;
-		s9[40] = x4y4;
-		s9[41] = x4y5;
-		s9[42] = x4y6;
-		s9[43] = x4y7;
-		s9[44] = x4y8;
-		s9[45] = x5y0;
-		s9[46] = x5y1;
-		s9[47] = x5y2;
-		s9[48] = x5y3;
-		s9[49] = x5y4;
-		s9[50] = x5y5;
-		s9[51] = x5y6;
-		s9[52] = x5y7;
-		s9[53] = x5y8;
-		s9[54] = x6y0;
-		s9[55] = x6y1;
-		s9[56] = x6y2;
-		s9[57] = x6y3;
-		s9[58] = x6y4;
-		s9[59] = x6y5;
-		s9[60] = x6y6;
-		s9[61] = x6y7;
-		s9[62] = x6y8;
-		s9[63] = x7y0;
-		s9[64] = x7y1;
-		s9[65] = x7y2;
-		s9[66] = x7y3;
-		s9[67] = x7y4;
-		s9[68] = x7y5;
-		s9[69] = x7y6;
-		s9[70] = x7y7;
-		s9[71] = x7y8;
-		s9[72] = x8y0;
-		s9[73] = x8y1;
-		s9[74] = x8y2;
-		s9[75] = x8y3;
-		s9[76] = x8y4;
-		s9[77] = x8y5;
-		s9[78] = x8y6;
-		s9[79] = x8y7;
-		s9[80] = x8y8;
+	public void dimensionChoicesButton(){
 
 		dimensionChoices = new JComboBox(dimensionsComboBox);
-		//dimensionsComboBox.addItemListener(s);
-
 		dimensionChoices.setBounds(50,50,90,20);
 		dimensionChoices.setSelectedIndex(0);
 		controlPanelGridBag.gridx = 1;
 		controlPanel.add(dimensionChoices, controlPanelGridBag);
-		String choice = (String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex());
-		gameButtons(choice);
-		dimensionChoices.addActionListener(new ActionListener() {     
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			   System.out.println("Value: " + dimensionChoices.getSelectedItem().toString());
+		gameButtons((String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()));
+		System.out.println("Started a game");
+		dimensionChoices.addItemListener( new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					System.out.println("Changed dimension Choice to " + (String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()) + 
+							"x" + (String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()) + " Game Board");
+					gamePanel.removeAll();
+					gameButtons((String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()));
 
-			   
-			   gamePanel.revalidate();
-			   gamePanel.repaint();
-
-
-		  
-			   if(dimensionChoices.getSelectedItem().toString().equals("3")){
-				   gameButtons("3");
-				  
-				   int n = 3;
-				   int v = 9;
-				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
-				   int count = 0;
-				   mainFrame.add(gamePanel);
-				   
-				   for (int i = 0; i < n; i++) {
-						for (int j = 0; j < n; j++) {
-				   			gamePanel.add(s3[+count++],BorderLayout.CENTER);
-							   //Component.setVisible(s3[+count++]);
-							for (int q = 1; q == v; q++) {
-								gamePanel.setComponentZOrder(s3[i],q);
-								s3[q].setVisible(true);
-							}
-						    gamePanel.revalidate();
-							gamePanel.repaint();
-							//s3[q].setVisible(true);
-							
-							
-							
-				  
-						}
-				   }
-				   
+					//					mainFrame.remove(gamePanel);
+					//					mainFrame.add(gamePanel, BorderLayout.WEST);
+					//					gameButtons((String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()));	
+					//gamePanel.revalidate();
+					//gamePanel.repaint();
+				}		
+				else {
+					gamePanel.setVisible(true);
 				}
-
-			   else if(dimensionChoices.getSelectedItem().toString().equals("4")){
-				   gameButtons("4");
-				   gamePanel.removeAll();
-				   int n = 4;
-				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
-				   int count = 0;
-				   mainFrame.add(gamePanel);
-				   int v = 16;
-				   for (int i = 0; i < n; i++) {
-						for (int j = 0; j < n; j++) {
-							gamePanel.add(s4[+count++],BorderLayout.CENTER);
-							for (int q = 1; q == v; q++) {
-								gamePanel.setComponentZOrder(s4[i],q);
-								s4[q].setVisible(true);
-							}
-						    gamePanel.revalidate();
-							gamePanel.repaint();
-							gamePanel.setComponentZOrder(s4[i],j);
-				  
-						}
-				   }
-					
-			   }
-			   else if(dimensionChoices.getSelectedItem().toString().equals("5")){
-				   gameButtons("5");
-				   //option(5);
-				   int n = 5;
-				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
-				   int count = 0;
-				   mainFrame.add(gamePanel);
-				   for (int i = 0; i < n; i++) {
-						for (int j = 0; j < n; j++) {
-							gamePanel.add(s5[+count++],BorderLayout.CENTER);
-						    gamePanel.revalidate();
-							gamePanel.repaint();
-							gamePanel.setComponentZOrder(s5[i],j);
-				  
-						}
-				   }
-
-			   }
-			   else if(dimensionChoices.getSelectedItem().toString().equals("6")){
-				   gameButtons("6");
-				   int n = 6;
-				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
-				   int count = 0;
-				   mainFrame.add(gamePanel);
-				   for (int i = 0; i < n; i++) {
-						for (int j = 0; j < n; j++) {
-							gamePanel.add(s6[+count++],BorderLayout.CENTER);
-						    gamePanel.revalidate();
-							gamePanel.repaint();
-							gamePanel.setComponentZOrder(s6[i],j);
-				  
-						}
-				   }
-
-			   }
-			   else if(dimensionChoices.getSelectedItem().toString().equals("7")){
-				   gameButtons("7");
-				   int n = 7;
-				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
-				   int count = 0;
-				   mainFrame.add(gamePanel);
-				   for (int i = 0; i < n; i++) {
-						for (int j = 0; j < n; j++) {
-							gamePanel.add(s7[+count++],BorderLayout.CENTER);
-						    gamePanel.revalidate();
-							gamePanel.repaint();
-							gamePanel.setComponentZOrder(s7[i],j);
-				  
-						}
-				   }
-
-			   }
-			   else if(dimensionChoices.getSelectedItem().toString().equals("8")){
-				   gameButtons("8");
-				   int n = 8;
-				   int t = 64;
-				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
-				   int count = 0;
-				   mainFrame.add(gamePanel);
-				   for (int i = 0; i < t; i++) {
-						for (int j = 0; j < t; j++) {
-							gamePanel.add(s8[i],BorderLayout.CENTER);
-						    gamePanel.revalidate();
-							gamePanel.repaint();
-							
-							gamePanel.setComponentZOrder(s8[i],j);
-							System.out.print(getComponentZOrder(gamePanel));
-						}
-				   }
-
-			   }
-			   else if(dimensionChoices.getSelectedItem().toString().equals("9")){
-				   gameButtons("9");
-				   int n = 9;
-				   gamePanel = new JPanel(new GridLayout(n, n)); //need to replace with dynamic array for sizing
-				   int count = 0;
-				   mainFrame.add(gamePanel);
-				   for (int i = 0; i < n; i++) {
-						for (int j = 0; j < n; j++) {
-							gamePanel.add(s9[+count++],BorderLayout.CENTER);
-						    gamePanel.revalidate();
-							gamePanel.repaint();
-							gamePanel.setComponentZOrder(s9[i],j);
-				  
-						}
-				   }
-
-			   }
-			   gamePanel.revalidate();
-               gamePanel.repaint();
-			   //option(dimensionChoices.getSelectedItem());
+				gamePanel.setVisible(true);
+				gamePanel.revalidate();
+				gamePanel.repaint();
 			}
 		});
 	}
-	/*public void itemStateChanged(ItemEvent e){
-		if (e.getSource() == dimensionChoices) {
- 
-            System.out.print(dimensionChoices.getSelectedItem() + " selected");
-        }
- 
-        // if state of combobox 2 is changed
-	}*/
+
+	public void actionPerformed(ActionEvent e) {
+		String action = e.getActionCommand();
+		if (action.equals("New")){
+			System.out.println("Clicked New");
+		}
+		if (action.equals("Solution")){
+			System.out.println("Clicked Solution");
+
+		}
+		if (action.equals("Exit")){
+			System.out.println("Clicked Exit");
+			System.out.println("GOODBYE!!!");
+			System.exit(0);
+
+		}
+		if (action.equals("Help")){
+			System.out.println("Clicked Help");
+
+		}
+		if (action.equals("Colors")){
+			System.out.println("Clicked Colors");
+
+		}
+		if (action.equals("About")){
+			System.out.println("Clicked About");
+
+		}
+		if (action.equals("NumPuz!")){
+			System.out.println("Clicked NumPuz!");
+			//Thread t1 = new Thread(splashScreen());
+			Thread getSplash = new Thread(new Runnable() {
+				public void run() {
+					/*try {
+						Thread.sleep(x);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}*/
+					splashScreen();
+
+				}
+			});
+			getSplash.start();
+		}
+
+		if (action.equals("Selection")){
+			System.out.println("Clicked Selection");
+
+		}
+		if (action.equals("Show")){
+			System.out.println("Clicked Show");
+			gamePanel.setVisible(true);
+			gamePanel.revalidate();
+			gamePanel.repaint();
+
+
+		}
+		if (action.equals("Hide")){
+			System.out.println("Clicked Hide");
+			gamePanel.setVisible(false);
+			gamePanel.revalidate();
+			gamePanel.repaint();
+
+		}
+		if (action.equals("Save")){
+			System.out.println("Clicked Save");
+
+		}		
+		if (action.equals("Load")){
+			System.out.println("Clicked Load");
+
+		}
+		if (action.equals("Rand")){
+			System.out.println("Clicked Rand");
+			gameButtons((String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()));
+			gamePanel.setVisible(true);
+			gamePanel.revalidate();
+			gamePanel.repaint();
+
+		}		
+		if (action.equals("Finish")){
+			System.out.println("Clicked Finish");
+
+		}
+		if (action.equals("Design")){
+			System.out.println("Clicked Design Mode");
+			designMode();
+
+		}		
+		if (action.equals("Play")){
+			System.out.println("Clicked Play Mode");
+
+		}
+
+
+	}
+
+	void designMode() {
+		designMessageBox = new JFrame("Design!");
+		designMessageBox.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+
+		designTextField = new JTextField(16);
+		designTextField.setSize(getMaximumSize());
+
+		designSetButton = new JButton("Submit");
+		designSetButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				//String message = designTextField;
+				System.out.println(designTextField);
+				//char [] msg = message.toCharArray();
+				//gameToDesign((String) dimensionChoices.getItemAt(dimensionChoices.getSelectedIndex()), msg);
+			}
+		});
+		displayTextDesign1 = new JLabel("Please enter your design...");
+		displayTextDesign2 = new JLabel("Design must fix game size constraints");
+
+		JPanel designPanel = new JPanel();
+		designPanel.add(designTextField);
+		designPanel.add(designSetButton);
+		designPanel.add(displayTextDesign1);
+		designPanel.add(displayTextDesign2);
+		designMessageBox.add(designPanel);
+
+		designMessageBox.setSize(300,150);
+		designMessageBox.show();
+
+
+
+	}
+
+	void gameToDesign(String dimensionChosen, char[] msg) {
+		int n = 3; //default size
+		int count;
+		JButton button;
+
+
+		if (dimensionChosen == "3") {
+			n = dimension[0];
+		}
+		else if (dimensionChosen == "4") {
+			n = dimension[1];
+		}		
+		else if (dimensionChosen == "5") {
+			n = dimension[2];
+		}		
+		else if (dimensionChosen == "6") {
+			n = dimension[3];
+		}		
+		else if (dimensionChosen == "7") {
+			n = dimension[4];
+		}		
+		else if (dimensionChosen == "8") {
+			n = dimension[5];
+		}	
+		else if (dimensionChosen == "9") {
+			n = dimension[6];
+		}	
+
+		count = n*n;
+
+
+		mainFrame.remove(gamePanel);
+		gamePanel = new JPanel(new GridLayout(n,n));
+		mainFrame.add(gamePanel);
+
+		String[][] gameButtons = new String[n][n];
+
+		int k = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				if (k < msg.length) {
+					gameButtons[i][j] = msg[k] + "";
+					k++;
+				}
+				else {
+					gameButtons[i][j] = "";
+				}
+				button = new JButton(gameButtons[i][j]);	
+				System.out.println(gameButtons[i][j]);
+
+				button.setSize(1/n, 1/n);
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						System.out.println("Clicked Designed-Game button");
+					}
+				});
+
+				gamePanel.add(button);
+				gamePanel.revalidate();
+				gamePanel.repaint();
+				//gamePanel.setVisible(false);
+			}		
+
+
+		}
+
+
+	}
 
 	JFrame gameControlPanel() {
 		//setup for NumPuz icon-button
-		controlPanelGridBag.fill = GridBagConstraints.NORTH;
+		controlPanelGridBag.fill = GridBagConstraints.HORIZONTAL;
 		controlPanelGridBag.gridx = 0;
 		controlPanelGridBag.gridy = 0;
-		controlPanelGridBag.gridheight = 2;
+		controlPanelGridBag.weightx = 2;
+		controlPanelGridBag.gridheight = 1;
 		controlPanel.add(numPuzButton, controlPanelGridBag);
 
 
@@ -773,30 +506,32 @@ public class GameController extends JPanel implements ItemListener {
 		menuBar.setVisible(true);
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.setVisible(true);
-		gamePanel.setVisible(true);
+		gamePanel.setVisible(false);
 		mainFrame.setVisible(true);
 		//gamePanel.add(numPuzSizes.numPuzComboBox);
 		return mainFrame;
 	}
 
 	void gameRadioButton() {
-//		radioHeader.setText("Mode:");
+		//		radioHeader.setText("Mode:");
 		designRadioButton = new JRadioButton("Design", true);
 		playRadioButton = new JRadioButton("Play");
 
 		designRadioButton.setMnemonic(KeyEvent.VK_C);
+		designRadioButton.addActionListener(this);
 		playRadioButton.setMnemonic(KeyEvent.VK_M);
+		playRadioButton.addActionListener(this);
 
-		designRadioButton.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {         
-				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
-			}           
-		});
-		playRadioButton.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {             
-				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
-			}           
-		});
+		//		designRadioButton.addItemListener(new ItemListener() {
+		//			public void itemStateChanged(ItemEvent e) {         
+		//				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
+		//			}           
+		//		});
+		//		playRadioButton.addItemListener(new ItemListener() {
+		//			public void itemStateChanged(ItemEvent e) {             
+		//				statusLabel.setText((e.getStateChange()==1?"checked":"unchecked"));
+		//			}           
+		//		});
 
 		ButtonGroup radioGroup = new ButtonGroup();
 		radioGroup.add(designRadioButton);
@@ -813,55 +548,232 @@ public class GameController extends JPanel implements ItemListener {
 		controlPanel.add(playRadioButton, controlPanelGridBag);
 		mainFrame.setVisible(true);
 	}
-	void gameButtons(String dimensionChosen) {
-		int n = Integer.parseInt(dimensionChosen);
 
-		option(n);
+	static void gameButtons(String dimensionChosen) {
+		int n = 3; //default size
+		int count;
+		JButton button;
+		Random rand = new Random();	
+
+
 		if (dimensionChosen == "3") {
 			n = dimension[0];
-			option(n);
 		}
 		else if (dimensionChosen == "4") {
 			n = dimension[1];
-			option(n);
+			
 		}		
 		else if (dimensionChosen == "5") {
 			n = dimension[2];
+			
 		}		
 		else if (dimensionChosen == "6") {
 			n = dimension[3];
+				
 		}		
 		else if (dimensionChosen == "7") {
 			n = dimension[4];
+			
 		}		
 		else if (dimensionChosen == "8") {
 			n = dimension[5];
+			
 		}	
 		else if (dimensionChosen == "9") {
 			n = dimension[6];
-		}	
-	}
-	void option(int n) {
-			
-		if (n == 18) {
-			gamePanel.removeAll();
-            gamePanel.revalidate();
-            gamePanel.repaint();
-			int count = 1;
-			mainFrame.add(gamePanel);
-			for (int i = 0; i < n; i++) {
-				for (int j = 0; j < n; j++) {
-					gamePanel.add(new JButton(""+count++), BorderLayout.CENTER);
-				}
-			}
 		}
-	}
+		final int x;
+		x = n;
+		count = n*n;
+      	
 
+		mainFrame.remove(gamePanel);
+		gamePanel = new JPanel(new GridLayout(n,n));
+		mainFrame.add(gamePanel);
+		JButton[] buttonArray = new JButton[count];
+		for (int i = 0; i < count; i++) {
+			
+			if (i == count-1){
 
-	@Override
+				button = new JButton();
+				buttonArray[i] = button;
+				gamePanel.add(buttonArray[i]);
+				button.setBackground(Color.BLACK);
+			}
+			else{
+				button = new JButton();
+				buttonArray[i] = button;
+				String[] s3 = {"1","2","3","4","5","6","7","8"};
+				String[] s4 = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"};
+				String[] s5 = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"};
+				String[] s6 = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
+				String[] s7 = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47"};
+				String[] s8 = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63"};
+				String[] s9 = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80"};
+
+				if(n ==3){
+					List<String> strList = Arrays.asList(s3);
+					Collections.shuffle(strList);
+					buttonArray[i].setText(s3[i]);
+					System.out.println(s3);
+				}
+				if(x ==4){
+					List<String> strList = Arrays.asList(s4);
+					Collections.shuffle(strList);
+					buttonArray[i].setText(s4[i]);
+					
+				}
+				if(x ==5){
+					List<String> strList = Arrays.asList(s5);
+					Collections.shuffle(strList);
+					buttonArray[i].setText(s5[i]);
+					
+				}
+				if(x ==6){
+					List<String> strList = Arrays.asList(s6);
+					Collections.shuffle(strList);
+					buttonArray[i].setText(s6[i]);
+					
+				}
+				if(x ==7){
+					List<String> strList = Arrays.asList(s7);
+					Collections.shuffle(strList);
+					buttonArray[i].setText(s7[i]);
+					
+				}
+				if(x ==8){
+					List<String> strList = Arrays.asList(s8);
+					Collections.shuffle(strList);
+					buttonArray[i].setText(s8[i]);
+					
+				}
+				if(x ==9){
+					List<String> strList = Arrays.asList(s9);
+					Collections.shuffle(strList);
+					buttonArray[i].setText(s9[i]);
+					
+				}
+				//buttonArray[i].setText(Integer.toString(i+1));
+				//buttonArray[i].setText(s3[i]);
+				
+				gamePanel.add(buttonArray[i]);
+			}
+			button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						String[] arr = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81"};
+						
+						System.out.println("Clicked game button");
+						//System.out.println(((JButton)ae.getSource()));
+						for (int i = 0; i < count; i++) {
+							int t = i;
+							try{
+								if(buttonArray[i].getText() == arr[i]){
+									System.out.println("Button " + i + " is in the right place");
+								}
+								else{
+									System.out.println("Button " + i + " is not in the right place");
+								}
+								if(((JButton)ae.getSource())== buttonArray[0]){
+									if(buttonArray[1].getText()==""){
+										buttonArray[0].setBackground(Color.BLACK);
+										buttonArray[1].setBackground(null);
+										buttonArray[1].setText(buttonArray[0].getText());
+										buttonArray[0].setText("");
+										System.out.println("left");
+		
+									}
+									else if(buttonArray[x].getText() == ""){
+										buttonArray[0].setBackground(Color.BLACK);
+										buttonArray[x].setBackground(null);
+										buttonArray[x].setText(buttonArray[0].getText());
+										buttonArray[0].setText("");
+								}
+							}
+							else if(((JButton)ae.getSource())== buttonArray[i]){
+								//nt t = i;
+								System.out.println(buttonArray[t].getText());
+								System.out.println(x);
+								System.out.println(t);
+								System.out.println(t-x);
+
+								if(buttonArray[t+1].getText()==""){
+									buttonArray[t].setBackground(Color.BLACK);
+									buttonArray[t+1].setBackground(null);
+									buttonArray[t+1].setText(buttonArray[t].getText());
+									buttonArray[t].setText("");
+									System.out.println("left");
+	
+								}
+								else if(buttonArray[t-1].getText() == ""){
+									buttonArray[t].setBackground(Color.BLACK);
+									buttonArray[t-1].setBackground(null);
+									buttonArray[t-1].setText(buttonArray[t].getText());
+									buttonArray[t].setText("");
+									System.out.println("right");
+								}
+								else if(buttonArray[t+x].getText() == ""){
+									buttonArray[t].setBackground(Color.BLACK);
+									buttonArray[t+x].setBackground(null);
+									buttonArray[t+x].setText(buttonArray[t].getText());
+									buttonArray[t].setText("");
+									System.out.println("up");
+								}
+								else if(buttonArray[t-x].getText() == ""){
+									buttonArray[t].setBackground(Color.BLACK);
+									buttonArray[t-x].setBackground(null);
+									buttonArray[t-x].setText(buttonArray[t].getText());
+									buttonArray[t].setText("");
+									System.out.println("down");
+
+								}
+								else{
+									System.out.println("error");
+								}
+								
+								
+								}
+							
+						else if(((JButton)ae.getSource())== buttonArray[count-1]){
+							if(buttonArray[count-2].getText()==""){
+								buttonArray[count-1].setBackground(Color.BLACK);
+								buttonArray[count-2].setBackground(null);
+								buttonArray[count-2].setText(buttonArray[count-1].getText());
+								buttonArray[count-1].setText("");
+								System.out.println("bottom left");
+
+							}
+							else if(buttonArray[count-x].getText() == ""){
+								buttonArray[count-1].setBackground(Color.BLACK);
+								buttonArray[count-x].setBackground(null);
+								buttonArray[count-x].setText(buttonArray[count-1].getText());
+								buttonArray[count-1].setText("");
+							}
+						}
+						
+						
+				}catch(Exception e){
+					//System.out.println("error");
+					if(buttonArray[t-x].getText() == ""){
+						buttonArray[t].setBackground(Color.BLACK);
+						buttonArray[t-x].setBackground(null);
+						buttonArray[t-x].setText(buttonArray[t].getText());
+						buttonArray[t].setText("");
+						System.out.println("down");
+
+					}
+
+							
+						}
+					}
+						
+		}});
+		}
+		
+		mainFrame.setVisible(true);}
 	public void itemStateChanged(ItemEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	
 }
